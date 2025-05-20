@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,96 +11,151 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f7f8fc; 
+            background-color: #f7f8fc;
         }
+
         .dashboard-card {
             background-color: white;
-            border-radius: 0.75rem; 
+            border-radius: 0.75rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 2px 6px rgba(0, 0, 0, 0.03);
-            padding: 1.5rem; 
+            padding: 1.5rem;
             transition: all 0.3s ease-in-out;
         }
+
         .dashboard-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.04);
         }
+
         .status-badge {
-            padding: 0.3rem 0.8rem; 
-            border-radius: 9999px; 
-            font-size: 0.7rem; 
-            font-weight: 600; 
+            padding: 0.3rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+
         .progress-bar-bg {
-            background-color: #e9ecef; 
-            border-radius: 9999px; 
-            height: 0.75rem; 
+            background-color: #e9ecef;
+            border-radius: 9999px;
+            height: 0.75rem;
             overflow: hidden;
         }
+
         .progress-bar-fill {
-            background-image: linear-gradient(to right, #4f46e5, #7c3aed); 
+            background-image: linear-gradient(to right, #4f46e5, #7c3aed);
             height: 100%;
-            border-radius: 9999px; 
+            border-radius: 9999px;
             transition: width 0.5s ease-in-out;
         }
-        .icon-xs { width: 1rem; height: 1rem; }
-        .icon-sm { width: 1.25rem; height: 1.25rem; }
-        .icon-md { width: 1.5rem; height: 1.5rem; }
-        .icon-lg { width: 2rem; height: 2rem; }
+
+        .icon-xs {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .icon-sm {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .icon-md {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .icon-lg {
+            width: 2rem;
+            height: 2rem;
+        }
 
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
         }
+
         ::-webkit-scrollbar-track {
             background: #f7f8fc;
             border-radius: 10px;
         }
+
         ::-webkit-scrollbar-thumb {
-            background: #d1d5db; 
+            background: #d1d5db;
             border-radius: 10px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
-            background: #9ca3af; 
+            background: #9ca3af;
         }
 
         .observation-value {
-            font-weight: 700; 
-            font-size: 1.125rem; 
+            font-weight: 700;
+            font-size: 1.125rem;
         }
-        .observation-range-normal { color: #10b981; }
-        .observation-range-low { color: #f59e0b; }
-        .observation-range-high { color: #ef4444; }
-        .observation-range-critical { color: #dc2626; font-weight: 700;}
+
+        .observation-range-normal {
+            color: #10b981;
+        }
+
+        .observation-range-low {
+            color: #f59e0b;
+        }
+
+        .observation-range-high {
+            color: #ef4444;
+        }
+
+        .observation-range-critical {
+            color: #dc2626;
+            font-weight: 700;
+        }
 
         .interactive-list-item {
             transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
         }
+
         .interactive-list-item:hover {
-            background-color: #f9fafb; 
+            background-color: #f9fafb;
             transform: translateX(2px);
         }
+
         .view-hidden {
             display: none !important;
         }
+
+        .goal-item-link {
+            display: block;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .goal-item-link:hover {
+            background-color: #f0f2f5;
+        }
     </style>
 </head>
+
 <body class="bg-gray-100">
 
     <div class="flex min-h-screen">
-        <aside id="patientDrawer" class="w-80 bg-white shadow-xl p-6 fixed inset-y-0 left-0 transform -translate-x-full transition-transform duration-300 ease-in-out z-40 overflow-y-auto flex flex-col">
+        <aside id="patientDrawer"
+            class="w-80 bg-white shadow-xl p-6 fixed inset-y-0 left-0 transform -translate-x-full transition-transform duration-300 ease-in-out z-40 overflow-y-auto flex flex-col">
             <div>
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-xl font-semibold text-slate-800">Patient Panel</h2>
-                    <button id="closeDrawerButton" aria-label="Close patient panel" class="text-slate-500 hover:text-slate-700 p-1 rounded-md hover:bg-slate-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    <button id="closeDrawerButton" aria-label="Close patient panel"
+                        class="text-slate-500 hover:text-slate-700 p-1 rounded-md hover:bg-slate-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
                 <div class="flex items-center space-x-4 mb-6">
-                    <img src="https://placehold.co/80x80/E0E7FF/4338CA?text=EV" alt="Patient Avatar" class="w-20 h-20 rounded-full border-2 border-indigo-200">
+                    <img src="https://placehold.co/80x80/E0E7FF/4338CA?text=EV" alt="Patient Avatar"
+                        class="w-20 h-20 rounded-full border-2 border-indigo-200">
                     <div>
                         <p class="text-lg font-bold text-indigo-700">Eleanor Vance</p>
                         <p class="text-sm text-slate-500">ID: P789012</p>
@@ -113,26 +169,36 @@
         </aside>
 
         <div id="contentWrapper" class="flex-1 transition-all duration-300 ease-in-out">
-            <header class="sticky top-0 bg-gray-100/80 backdrop-blur-lg shadow-sm p-4 md:p-6 z-30 flex items-center justify-between">
-                <button id="openDrawerButton" aria-label="Open patient panel" class="text-slate-700 hover:text-indigo-600 p-2 -ml-2 rounded-md hover:bg-slate-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+            <header
+                class="sticky top-0 bg-gray-100/80 backdrop-blur-lg shadow-sm p-4 md:p-6 z-30 flex items-center justify-between">
+                <button id="openDrawerButton" aria-label="Open patient panel"
+                    class="text-slate-700 hover:text-indigo-600 p-2 -ml-2 rounded-md hover:bg-slate-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
                 </button>
                 <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-slate-800">Patient Care Dashboard</h1>
                 <div>
-                    <button aria-label="Notifications" class="p-2 text-slate-600 hover:text-indigo-600 rounded-full hover:bg-slate-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                    <button aria-label="Notifications"
+                        class="p-2 text-slate-600 hover:text-indigo-600 rounded-full hover:bg-slate-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                         </svg>
                     </button>
-                     <button aria-label="User Profile" class="ml-2 p-1 rounded-full hover:bg-slate-200">
-                        <img src="https://placehold.co/32x32/C4B5FD/4338CA?text=AU" alt="User Avatar" class="w-8 h-8 rounded-full">
+                    <button aria-label="User Profile" class="ml-2 p-1 rounded-full hover:bg-slate-200">
+                        <img src="https://placehold.co/32x32/C4B5FD/4338CA?text=AU" alt="User Avatar"
+                            class="w-8 h-8 rounded-full">
                     </button>
                 </div>
             </header>
 
             <main class="p-4 md:p-6">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    
+
                     <div id="middleColumn" class="lg:col-span-7 xl:col-span-8 space-y-6">
                         <div id="dashboardView" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="dashboard-card md:col-span-2 flex flex-col">
@@ -148,14 +214,22 @@
                                     </div>
                                     <div class="flex justify-between items-center">
                                         <span class="text-sm text-slate-500">Status:</span>
-                                        <span class="status-badge bg-green-100 text-green-700 border border-green-200">Active</span>
+                                        <span
+                                            class="status-badge bg-green-100 text-green-700 border border-green-200">Active</span>
                                     </div>
                                 </div>
                                 <p class="text-sm text-slate-600 mb-auto leading-relaxed">
-                                    This comprehensive care plan focuses on managing Eleanor's Type 2 Diabetes and Hypertension through a combination of medication adherence, lifestyle modifications (diet and exercise), and regular monitoring of key health indicators. The primary goals are to reduce HbA1c levels, maintain blood pressure within target ranges, and improve overall cardiovascular health. Additional focus on recent cognitive assessment.
+                                    This comprehensive care plan focuses on managing Eleanor's Type 2 Diabetes and
+                                    Hypertension through a combination of medication adherence, lifestyle modifications
+                                    (diet and exercise), and regular monitoring of key health indicators. The primary
+                                    goals are to reduce HbA1c levels, maintain blood pressure within target ranges, and
+                                    improve overall cardiovascular health. Additional focus on recent cognitive
+                                    assessment.
                                 </p>
                                 <div class="pt-4 mt-4">
-                                    <label for="plan-progress" class="text-sm font-medium text-slate-600 mb-1 block">Overall Progress (30%)</label>
+                                    <label for="plan-progress"
+                                        class="text-sm font-medium text-slate-600 mb-1 block">Overall Progress
+                                        (30%)</label>
                                     <div class="progress-bar-bg">
                                         <div class="progress-bar-fill" style="width: 30%;"></div>
                                     </div>
@@ -167,51 +241,81 @@
                                     <div>
                                         <div class="flex justify-between items-center mb-4">
                                             <h2 class="text-xl font-semibold text-slate-700">Conditions</h2>
-                                            <button id="addConditionButton" class="ml-auto px-3 py-1 text-xs font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors flex items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
-                                                    <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                                            <button id="addConditionButton"
+                                                class="ml-auto px-3 py-1 text-xs font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                    fill="currentColor" class="w-4 h-4 mr-1">
+                                                    <path
+                                                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
                                                 </svg>
                                                 Add Condition
                                             </button>
                                         </div>
                                         <ul class="space-y-2 text-sm">
-                                            <li class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100">Diabetes Mellitus Type 2 <span class="text-xs text-slate-400 block">(Chronic, Onset: 2010)</span></li>
-                                            <li class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100">Hypertension <span class="text-xs text-slate-400 block">(Chronic, Onset: 2012)</span></li>
-                                            <li class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100">Atherosclerosis <span class="text-xs text-slate-400 block">(Chronic)</span></li>
-                                            <li class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100">Mild Cognitive Impairment <span class="text-xs text-slate-400 block">(New, Onset: 2024)</span></li>
+                                            <li
+                                                class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100">
+                                                Diabetes Mellitus Type 2 <span
+                                                    class="text-xs text-slate-400 block">(Chronic, Onset: 2010)</span>
+                                            </li>
+                                            <li
+                                                class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100">
+                                                Hypertension <span class="text-xs text-slate-400 block">(Chronic, Onset:
+                                                    2012)</span></li>
+                                            <li
+                                                class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100">
+                                                Atherosclerosis <span
+                                                    class="text-xs text-slate-400 block">(Chronic)</span></li>
+                                            <li
+                                                class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100">
+                                                Mild Cognitive Impairment <span
+                                                    class="text-xs text-slate-400 block">(New, Onset: 2024)</span></li>
                                         </ul>
                                     </div>
                                     <div>
                                         <div class="flex justify-between items-center mb-4">
                                             <h2 class="text-xl font-semibold text-slate-700">Orders</h2>
-                                            <button id="addOrderButton" class="ml-auto px-3 py-1 text-xs font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors flex items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
-                                                    <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                                            <button id="addOrderButton"
+                                                class="ml-auto px-3 py-1 text-xs font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                    fill="currentColor" class="w-4 h-4 mr-1">
+                                                    <path
+                                                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
                                                 </svg>
                                                 Add Order
                                             </button>
                                         </div>
                                         <ul class="space-y-2 text-sm">
-                                            <li class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100 flex justify-between items-center">
-                                                <span>Insulin Glargine</span> <span class="status-badge bg-blue-100 text-blue-700 border border-blue-200">Active</span>
+                                            <li
+                                                class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100 flex justify-between items-center">
+                                                <span>Insulin Glargine</span> <span
+                                                    class="status-badge bg-blue-100 text-blue-700 border border-blue-200">Active</span>
                                             </li>
-                                            <li class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100 flex justify-between items-center">
-                                                <span>Liver Function Tests</span> <span class="status-badge bg-yellow-100 text-yellow-700 border border-yellow-200">Pending Results</span>
+                                            <li
+                                                class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100 flex justify-between items-center">
+                                                <span>Liver Function Tests</span> <span
+                                                    class="status-badge bg-yellow-100 text-yellow-700 border border-yellow-200">Pending
+                                                    Results</span>
                                             </li>
-                                            <li class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100 flex justify-between items-center">
-                                                <span>Kidney Function Test</span> <span class="status-badge bg-green-100 text-green-700 border border-green-200">Completed</span>
+                                            <li
+                                                class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100 flex justify-between items-center">
+                                                <span>Kidney Function Test</span> <span
+                                                    class="status-badge bg-green-100 text-green-700 border border-green-200">Completed</span>
                                             </li>
-                                            <li class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100 flex justify-between items-center">
-                                                <span>Blood Sugar Tests (HbA1c)</span> <span class="status-badge bg-blue-100 text-blue-700 border border-blue-200">Active</span>
+                                            <li
+                                                class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100 flex justify-between items-center">
+                                                <span>Blood Sugar Tests (HbA1c)</span> <span
+                                                    class="status-badge bg-blue-100 text-blue-700 border border-blue-200">Active</span>
                                             </li>
-                                            <li class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100 flex justify-between items-center">
-                                                <span>Lipid Profile</span> <span class="status-badge bg-gray-200 text-gray-700 border border-gray-300">Scheduled</span>
+                                            <li
+                                                class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100 flex justify-between items-center">
+                                                <span>Lipid Profile</span> <span
+                                                    class="status-badge bg-gray-200 text-gray-700 border border-gray-300">Scheduled</span>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="dashboard-card md:col-span-1 flex flex-col">
                                 <h2 class="text-xl font-semibold text-slate-700 mb-4">Current Observations</h2>
                                 <p class="text-xs text-slate-400 mb-3">Last Labs: 18 May 2025</p>
@@ -219,30 +323,42 @@
                                     <div class="p-2.5 bg-slate-50 rounded-lg">
                                         <div class="flex justify-between items-baseline">
                                             <span class="text-sm text-slate-600">Cholesterol</span>
-                                            <span class="observation-value observation-range-high">240 <span class="text-xs font-normal">mg/dL</span></span>
+                                            <span class="observation-value observation-range-high">240 <span
+                                                    class="text-xs font-normal">mg/dL</span></span>
                                         </div>
-                                        <div class="mt-1 h-1.5 bg-red-200 rounded-full w-full"><div class="h-1.5 bg-red-500 rounded-full" style="width: 80%;"></div></div>
+                                        <div class="mt-1 h-1.5 bg-red-200 rounded-full w-full">
+                                            <div class="h-1.5 bg-red-500 rounded-full" style="width: 80%;"></div>
+                                        </div>
                                     </div>
                                     <div class="p-2.5 bg-slate-50 rounded-lg">
                                         <div class="flex justify-between items-baseline">
                                             <span class="text-sm text-slate-600">LDL</span>
-                                            <span class="observation-value observation-range-high">165 <span class="text-xs font-normal">mg/dL</span></span>
+                                            <span class="observation-value observation-range-high">165 <span
+                                                    class="text-xs font-normal">mg/dL</span></span>
                                         </div>
-                                        <div class="mt-1 h-1.5 bg-red-200 rounded-full w-full"><div class="h-1.5 bg-red-500 rounded-full" style="width: 75%;"></div></div>
+                                        <div class="mt-1 h-1.5 bg-red-200 rounded-full w-full">
+                                            <div class="h-1.5 bg-red-500 rounded-full" style="width: 75%;"></div>
+                                        </div>
                                     </div>
                                     <div class="p-2.5 bg-slate-50 rounded-lg">
                                         <div class="flex justify-between items-baseline">
                                             <span class="text-sm text-slate-600">HDL</span>
-                                            <span class="observation-value observation-range-low">35 <span class="text-xs font-normal">mg/dL</span></span>
+                                            <span class="observation-value observation-range-low">35 <span
+                                                    class="text-xs font-normal">mg/dL</span></span>
                                         </div>
-                                        <div class="mt-1 h-1.5 bg-amber-200 rounded-full w-full"><div class="h-1.5 bg-amber-500 rounded-full" style="width: 40%;"></div></div>
+                                        <div class="mt-1 h-1.5 bg-amber-200 rounded-full w-full">
+                                            <div class="h-1.5 bg-amber-500 rounded-full" style="width: 40%;"></div>
+                                        </div>
                                     </div>
-                                     <div class="p-2.5 bg-slate-50 rounded-lg">
+                                    <div class="p-2.5 bg-slate-50 rounded-lg">
                                         <div class="flex justify-between items-baseline">
                                             <span class="text-sm text-slate-600">HbA1c</span>
-                                            <span class="observation-value observation-range-critical">7.8<span class="text-xs font-normal">%</span></span>
+                                            <span class="observation-value observation-range-critical">7.8<span
+                                                    class="text-xs font-normal">%</span></span>
                                         </div>
-                                        <div class="mt-1 h-1.5 bg-red-200 rounded-full w-full"><div class="h-1.5 bg-red-600 rounded-full" style="width: 85%;"></div></div>
+                                        <div class="mt-1 h-1.5 bg-red-200 rounded-full w-full">
+                                            <div class="h-1.5 bg-red-600 rounded-full" style="width: 85%;"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -250,15 +366,18 @@
                             <div class="dashboard-card md:col-span-1 flex flex-col">
                                 <div class="flex justify-between items-center mb-4">
                                     <h2 class="text-xl font-semibold text-slate-700">Goal Expectations</h2>
-                                    <button id="addGoalButton" class="ml-auto px-3 py-1 text-xs font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
-                                            <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                                    <button id="addGoalButton"
+                                        class="ml-auto px-3 py-1 text-xs font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                            class="w-4 h-4 mr-1">
+                                            <path
+                                                d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
                                         </svg>
                                         Add Goal
                                     </button>
                                 </div>
-                                <div class="space-y-4">
-                                    <div>
+                                <div class="space-y-2">
+                                    <a href="#view-goal-cholesterol" class="goal-item-link">
                                         <div class="flex justify-between items-center mb-1">
                                             <h3 class="text-md font-medium text-slate-700">Reduce Cholesterol</h3>
                                             <span class="text-xs text-slate-500">Target: &lt;180 mg/dL</span>
@@ -266,9 +385,10 @@
                                         <div class="progress-bar-bg">
                                             <div class="progress-bar-fill bg-red-500" style="width: 80%;"></div>
                                         </div>
-                                        <p class="text-xs text-slate-500 mt-1">Current: <span class="font-semibold">240 mg/dL</span></p>
-                                    </div>
-                                    <div>
+                                        <p class="text-xs text-slate-500 mt-1">Current: <span class="font-semibold">240
+                                                mg/dL</span></p>
+                                    </a>
+                                    <a href="#view-goal-liver" class="goal-item-link">
                                         <div class="flex justify-between items-center mb-1">
                                             <h3 class="text-md font-medium text-slate-700">Improve Liver Function</h3>
                                             <span class="text-xs text-slate-500">Target: Bilirubin &lt;1.2 mg/dL</span>
@@ -276,9 +396,10 @@
                                         <div class="progress-bar-bg">
                                             <div class="progress-bar-fill bg-yellow-500" style="width: 60%;"></div>
                                         </div>
-                                         <p class="text-xs text-slate-500 mt-1">Current Bilirubin: <span class="font-semibold">1.3 mg/dL</span></p>
-                                    </div>
-                                    <div>
+                                        <p class="text-xs text-slate-500 mt-1">Current Bilirubin: <span
+                                                class="font-semibold">1.3 mg/dL</span></p>
+                                    </a>
+                                    <a href="#view-goal-bloodsugar" class="goal-item-link">
                                         <div class="flex justify-between items-center mb-1">
                                             <h3 class="text-md font-medium text-slate-700">Blood Sugar Control</h3>
                                             <span class="text-xs text-slate-500">Target: HbA1c &lt;7.0%</span>
@@ -286,12 +407,13 @@
                                         <div class="progress-bar-bg">
                                             <div class="progress-bar-fill bg-red-500" style="width: 85%;"></div>
                                         </div>
-                                         <p class="text-xs text-slate-500 mt-1">Current HbA1c: <span class="font-semibold">7.8%</span></p>
-                                    </div>
+                                        <p class="text-xs text-slate-500 mt-1">Current HbA1c: <span
+                                                class="font-semibold">7.8%</span></p>
+                                    </a>
                                 </div>
                             </div>
-                            
-                            <div class="dashboard-card md:col-span-2 flex flex-col"> 
+
+                            <div class="dashboard-card md:col-span-2 flex flex-col">
                                 <h2 class="text-xl font-semibold text-slate-700 mb-4">Barriers to Care</h2>
                                 <ul class="space-y-3">
                                     <li class="interactive-list-item p-3 bg-slate-50 rounded-lg hover:bg-slate-100">
@@ -308,11 +430,14 @@
                                     </li>
                                 </ul>
                             </div>
-                             <div class="dashboard-card md:col-span-2"> 
+                            <div class="dashboard-card md:col-span-2">
                                 <h2 class="text-xl font-semibold text-slate-700 mb-4">Notes & Activity Log</h2>
-                                <textarea id="careNotes" name="careNotes" rows="4" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow text-sm mb-3" placeholder="Enter new clinical note..."></textarea>
+                                <textarea id="careNotes" name="careNotes" rows="4"
+                                    class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow text-sm mb-3"
+                                    placeholder="Enter new clinical note..."></textarea>
                                 <div class="mt-1 text-right">
-                                    <button class="px-5 py-2.5 text-sm font-medium text-white bg-slate-700 rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-1 transition-colors shadow-md hover:shadow-lg">
+                                    <button
+                                        class="px-5 py-2.5 text-sm font-medium text-white bg-slate-700 rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-1 transition-colors shadow-md hover:shadow-lg">
                                         Save Note
                                     </button>
                                 </div>
@@ -320,12 +445,16 @@
                                     <h3 class="text-md font-semibold text-slate-600 mb-3">Recent Patient Activity:</h3>
                                     <div class="space-y-3 max-h-40 overflow-y-auto">
                                         <div class="p-3 bg-slate-50 rounded-lg text-sm interactive-list-item">
-                                            <p class="text-slate-700">Lab results (Potassium) reviewed by Dr. Sharma.</p>
-                                            <p class="text-xs text-slate-400 mt-1">System Log - 19 May 2025, 09:15 AM</p>
+                                            <p class="text-slate-700">Lab results (Potassium) reviewed by Dr. Sharma.
+                                            </p>
+                                            <p class="text-xs text-slate-400 mt-1">System Log - 19 May 2025, 09:15 AM
+                                            </p>
                                         </div>
                                         <div class="p-3 bg-slate-50 rounded-lg text-sm interactive-list-item">
-                                            <p class="text-slate-700">Patient reported increased fatigue. Advised to monitor blood sugar.</p>
-                                            <p class="text-xs text-slate-400 mt-1">Dr. Anya Sharma - 15 May 2025, 10:30 AM</p>
+                                            <p class="text-slate-700">Patient reported increased fatigue. Advised to
+                                                monitor blood sugar.</p>
+                                            <p class="text-xs text-slate-400 mt-1">Dr. Anya Sharma - 15 May 2025, 10:30
+                                                AM</p>
                                         </div>
                                     </div>
                                 </div>
@@ -336,15 +465,18 @@
                             <div class="dashboard-card">
                                 <div class="flex justify-between items-center mb-6">
                                     <h2 class="text-2xl font-semibold text-slate-800">Create New Order</h2>
-                                    <button id="backToDashboardFromOrder" class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-200 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-colors">
+                                    <button id="backToDashboardFromOrder"
+                                        class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-200 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-colors">
                                         Back to Dashboard
                                     </button>
                                 </div>
                                 <form id="createOrderForm">
                                     <div class="space-y-4">
                                         <div>
-                                            <label for="orderType" class="block text-sm font-medium text-slate-700 mb-1">Order Type</label>
-                                            <select id="orderType" name="orderType" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                            <label for="orderType"
+                                                class="block text-sm font-medium text-slate-700 mb-1">Order Type</label>
+                                            <select id="orderType" name="orderType"
+                                                class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                                 <option>Lab Test</option>
                                                 <option>Medication</option>
                                                 <option>Imaging</option>
@@ -353,27 +485,39 @@
                                             </select>
                                         </div>
                                         <div>
-                                            <label for="orderDetails" class="block text-sm font-medium text-slate-700 mb-1">Order Details</label>
-                                            <textarea id="orderDetails" name="orderDetails" rows="3" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Complete Blood Count (CBC), Lisinopril 10mg, Chest X-Ray PA and Lateral..."></textarea>
+                                            <label for="orderDetails"
+                                                class="block text-sm font-medium text-slate-700 mb-1">Order
+                                                Details</label>
+                                            <textarea id="orderDetails" name="orderDetails" rows="3"
+                                                class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                                placeholder="e.g., Complete Blood Count (CBC), Lisinopril 10mg, Chest X-Ray PA and Lateral..."></textarea>
                                         </div>
                                         <div>
-                                            <label for="orderPriority" class="block text-sm font-medium text-slate-700 mb-1">Priority</label>
-                                            <select id="orderPriority" name="orderPriority" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                            <label for="orderPriority"
+                                                class="block text-sm font-medium text-slate-700 mb-1">Priority</label>
+                                            <select id="orderPriority" name="orderPriority"
+                                                class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                                 <option>Routine</option>
                                                 <option>Urgent</option>
                                                 <option>STAT</option>
                                             </select>
                                         </div>
-                                         <div>
-                                            <label for="orderNotes" class="block text-sm font-medium text-slate-700 mb-1">Additional Notes (Optional)</label>
-                                            <textarea id="orderNotes" name="orderNotes" rows="2" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Patient fasting status, specific instructions for referral..."></textarea>
+                                        <div>
+                                            <label for="orderNotes"
+                                                class="block text-sm font-medium text-slate-700 mb-1">Additional Notes
+                                                (Optional)</label>
+                                            <textarea id="orderNotes" name="orderNotes" rows="2"
+                                                class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                                placeholder="e.g., Patient fasting status, specific instructions for referral..."></textarea>
                                         </div>
                                     </div>
                                     <div class="mt-6 text-right">
-                                        <button type="button" id="cancelOrderButton" class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 rounded-md hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-400 transition-colors mr-2">
+                                        <button type="button" id="cancelOrderButton"
+                                            class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 rounded-md hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-400 transition-colors mr-2">
                                             Cancel
                                         </button>
-                                        <button type="submit" class="px-6 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors shadow-md hover:shadow-lg">
+                                        <button type="submit"
+                                            class="px-6 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors shadow-md hover:shadow-lg">
                                             Submit Order
                                         </button>
                                     </div>
@@ -385,19 +529,27 @@
                             <div class="dashboard-card">
                                 <div class="flex justify-between items-center mb-6">
                                     <h2 class="text-2xl font-semibold text-slate-800">Add New Condition</h2>
-                                     <button id="backToDashboardFromCondition" class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-200 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-colors">
+                                    <button id="backToDashboardFromCondition"
+                                        class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-200 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-colors">
                                         Back to Dashboard
                                     </button>
                                 </div>
                                 <form id="createConditionForm">
                                     <div class="space-y-4">
                                         <div>
-                                            <label for="conditionName" class="block text-sm font-medium text-slate-700 mb-1">Condition Name / Code (SNOMED CT)</label>
-                                            <input type="text" id="conditionName" name="conditionName" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Type 2 diabetes mellitus">
+                                            <label for="conditionName"
+                                                class="block text-sm font-medium text-slate-700 mb-1">Condition Name /
+                                                Code (SNOMED CT)</label>
+                                            <input type="text" id="conditionName" name="conditionName"
+                                                class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                                placeholder="e.g., Type 2 diabetes mellitus">
                                         </div>
                                         <div>
-                                            <label for="conditionClinicalStatus" class="block text-sm font-medium text-slate-700 mb-1">Clinical Status</label>
-                                            <select id="conditionClinicalStatus" name="conditionClinicalStatus" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                            <label for="conditionClinicalStatus"
+                                                class="block text-sm font-medium text-slate-700 mb-1">Clinical
+                                                Status</label>
+                                            <select id="conditionClinicalStatus" name="conditionClinicalStatus"
+                                                class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                                 <option>Active</option>
                                                 <option>Recurrence</option>
                                                 <option>Relapse</option>
@@ -407,8 +559,11 @@
                                             </select>
                                         </div>
                                         <div>
-                                            <label for="conditionVerificationStatus" class="block text-sm font-medium text-slate-700 mb-1">Verification Status</label>
-                                            <select id="conditionVerificationStatus" name="conditionVerificationStatus" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                            <label for="conditionVerificationStatus"
+                                                class="block text-sm font-medium text-slate-700 mb-1">Verification
+                                                Status</label>
+                                            <select id="conditionVerificationStatus" name="conditionVerificationStatus"
+                                                class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                                 <option>Unconfirmed</option>
                                                 <option>Provisional</option>
                                                 <option>Differential</option>
@@ -418,27 +573,37 @@
                                             </select>
                                         </div>
                                         <div>
-                                            <label for="conditionOnsetDate" class="block text-sm font-medium text-slate-700 mb-1">Onset Date (Approximate)</label>
-                                            <input type="date" id="conditionOnsetDate" name="conditionOnsetDate" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                            <label for="conditionOnsetDate"
+                                                class="block text-sm font-medium text-slate-700 mb-1">Onset Date
+                                                (Approximate)</label>
+                                            <input type="date" id="conditionOnsetDate" name="conditionOnsetDate"
+                                                class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                         </div>
                                         <div>
-                                            <label for="conditionSeverity" class="block text-sm font-medium text-slate-700 mb-1">Severity</label>
-                                            <select id="conditionSeverity" name="conditionSeverity" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                            <label for="conditionSeverity"
+                                                class="block text-sm font-medium text-slate-700 mb-1">Severity</label>
+                                            <select id="conditionSeverity" name="conditionSeverity"
+                                                class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                                 <option>Mild</option>
                                                 <option>Moderate</option>
                                                 <option>Severe</option>
                                             </select>
                                         </div>
                                         <div>
-                                            <label for="conditionNotes" class="block text-sm font-medium text-slate-700 mb-1">Notes</label>
-                                            <textarea id="conditionNotes" name="conditionNotes" rows="3" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Diagnosed during routine check-up..."></textarea>
+                                            <label for="conditionNotes"
+                                                class="block text-sm font-medium text-slate-700 mb-1">Notes</label>
+                                            <textarea id="conditionNotes" name="conditionNotes" rows="3"
+                                                class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                                placeholder="e.g., Diagnosed during routine check-up..."></textarea>
                                         </div>
                                     </div>
                                     <div class="mt-6 text-right">
-                                        <button type="button" id="cancelConditionButton" class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 rounded-md hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-400 transition-colors mr-2">
+                                        <button type="button" id="cancelConditionButton"
+                                            class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 rounded-md hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-400 transition-colors mr-2">
                                             Cancel
                                         </button>
-                                        <button type="submit" class="px-6 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors shadow-md hover:shadow-lg">
+                                        <button type="submit"
+                                            class="px-6 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors shadow-md hover:shadow-lg">
                                             Add Condition
                                         </button>
                                     </div>
@@ -450,28 +615,38 @@
                             <div class="dashboard-card">
                                 <div class="flex justify-between items-center mb-6">
                                     <h2 class="text-2xl font-semibold text-slate-800">Create New Goal</h2>
-                                     <button id="backToDashboardFromGoal" class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-200 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-colors">
+                                    <button id="backToDashboardFromGoal"
+                                        class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-200 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-colors">
                                         Back to Dashboard
                                     </button>
                                 </div>
                                 <form id="createGoalForm">
                                     <div class="space-y-4">
                                         <div>
-                                            <label for="goalDescription" class="block text-sm font-medium text-slate-700 mb-1">Description (e.g., Weight loss, A1c reduction)</label>
-                                            <input type="text" id="goalDescription" name="goalDescription" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Describe the goal">
+                                            <label for="goalDescription"
+                                                class="block text-sm font-medium text-slate-700 mb-1">Description (e.g.,
+                                                Weight loss, A1c reduction)</label>
+                                            <input type="text" id="goalDescription" name="goalDescription"
+                                                class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                                placeholder="Describe the goal">
                                         </div>
                                         <div>
-                                            <label for="goalLifecycleStatus" class="block text-sm font-medium text-slate-700 mb-1">Lifecycle Status</label>
-                                            <select id="goalLifecycleStatus" name="goalLifecycleStatus" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                            <label for="goalLifecycleStatus"
+                                                class="block text-sm font-medium text-slate-700 mb-1">Lifecycle
+                                                Status</label>
+                                            <select id="goalLifecycleStatus" name="goalLifecycleStatus"
+                                                class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                                 <option value="planned">Planned</option>
                                                 <option value="accepted">Accepted</option>
                                                 <option value="active" selected>Active</option>
                                                 <option value="on-hold">On Hold</option>
                                             </select>
                                         </div>
-                                         <div>
-                                            <label for="goalCategory" class="block text-sm font-medium text-slate-700 mb-1">Category</label>
-                                            <select id="goalCategory" name="goalCategory" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                        <div>
+                                            <label for="goalCategory"
+                                                class="block text-sm font-medium text-slate-700 mb-1">Category</label>
+                                            <select id="goalCategory" name="goalCategory"
+                                                class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                                 <option>Dietary</option>
                                                 <option>Behavioral</option>
                                                 <option>Treatment</option>
@@ -480,110 +655,275 @@
                                             </select>
                                         </div>
                                         <div>
-                                            <label for="goalStartDate" class="block text-sm font-medium text-slate-700 mb-1">Start Date</label>
-                                            <input type="date" id="goalStartDate" name="goalStartDate" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                            <label for="goalStartDate"
+                                                class="block text-sm font-medium text-slate-700 mb-1">Start Date</label>
+                                            <input type="date" id="goalStartDate" name="goalStartDate"
+                                                class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                         </div>
                                         <fieldset class="border p-4 rounded-md">
-                                            <legend class="text-sm font-medium text-slate-700 px-1">Target Outcome</legend>
+                                            <legend class="text-sm font-medium text-slate-700 px-1">Target Outcome
+                                            </legend>
                                             <div class="space-y-3 mt-2">
                                                 <div>
-                                                    <label for="goalTargetMeasure" class="block text-xs font-medium text-slate-600 mb-1">Measure (e.g., Weight, HbA1c, Blood Pressure)</label>
-                                                    <input type="text" id="goalTargetMeasure" name="goalTargetMeasure" class="w-full p-2 border border-slate-300 rounded-md text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Body Weight">
+                                                    <label for="goalTargetMeasure"
+                                                        class="block text-xs font-medium text-slate-600 mb-1">Measure
+                                                        (e.g., Weight, HbA1c, Blood Pressure)</label>
+                                                    <input type="text" id="goalTargetMeasure" name="goalTargetMeasure"
+                                                        class="w-full p-2 border border-slate-300 rounded-md text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                                                        placeholder="e.g., Body Weight">
                                                 </div>
                                                 <div>
-                                                    <label for="goalTargetDetailValue" class="block text-xs font-medium text-slate-600 mb-1">Target Value (e.g., 70 kg, <7%)</label>
-                                                    <input type="text" id="goalTargetDetailValue" name="goalTargetDetailValue" class="w-full p-2 border border-slate-300 rounded-md text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., 70 kg">
+                                                    <label for="goalTargetDetailValue"
+                                                        class="block text-xs font-medium text-slate-600 mb-1">Target
+                                                        Value (e.g., 70 kg, <7%)< /label>
+                                                            <input type="text" id="goalTargetDetailValue"
+                                                                name="goalTargetDetailValue"
+                                                                class="w-full p-2 border border-slate-300 rounded-md text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                                                                placeholder="e.g., 70 kg">
                                                 </div>
                                                 <div>
-                                                    <label for="goalTargetDueDate" class="block text-xs font-medium text-slate-600 mb-1">Due Date (Optional)</label>
-                                                    <input type="date" id="goalTargetDueDate" name="goalTargetDueDate" class="w-full p-2 border border-slate-300 rounded-md text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                                                    <label for="goalTargetDueDate"
+                                                        class="block text-xs font-medium text-slate-600 mb-1">Due Date
+                                                        (Optional)</label>
+                                                    <input type="date" id="goalTargetDueDate" name="goalTargetDueDate"
+                                                        class="w-full p-2 border border-slate-300 rounded-md text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
                                                 </div>
                                             </div>
                                         </fieldset>
                                         <div>
-                                            <label for="goalNotes" class="block text-sm font-medium text-slate-700 mb-1">Notes (Optional)</label>
-                                            <textarea id="goalNotes" name="goalNotes" rows="2" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Additional details about the goal..."></textarea>
+                                            <label for="goalNotes"
+                                                class="block text-sm font-medium text-slate-700 mb-1">Notes
+                                                (Optional)</label>
+                                            <textarea id="goalNotes" name="goalNotes" rows="2"
+                                                class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                                placeholder="Additional details about the goal..."></textarea>
                                         </div>
                                     </div>
                                     <div class="mt-6 text-right">
-                                        <button type="button" id="cancelGoalButton" class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 rounded-md hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-400 transition-colors mr-2">
+                                        <button type="button" id="cancelGoalButton"
+                                            class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 rounded-md hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-400 transition-colors mr-2">
                                             Cancel
                                         </button>
-                                        <button type="submit" class="px-6 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors shadow-md hover:shadow-lg">
+                                        <button type="submit"
+                                            class="px-6 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors shadow-md hover:shadow-lg">
                                             Add Goal
                                         </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
+
+                        <div id="goalDetailView" class="lg:col-span-2 md:col-span-2 view-hidden">
+                            <div class="dashboard-card">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h2 class="text-2xl font-semibold text-slate-800">Goal Details</h2>
+                                    <button id="backToDashboardFromGoalDetail"
+                                        class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-200 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-colors">
+                                        Back to Dashboard
+                                    </button>
+                                </div>
+                                <div class="space-y-4">
+                                    <div>
+                                        <h3 class="text-sm font-medium text-slate-500">Description</h3>
+                                        <p id="viewGoalDescription" class="text-lg text-slate-800"></p>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <h3 class="text-sm font-medium text-slate-500">Lifecycle Status</h3>
+                                            <p id="viewGoalLifecycleStatus" class="text-slate-700"></p>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-sm font-medium text-slate-500">Category</h3>
+                                            <p id="viewGoalCategory" class="text-slate-700"></p>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <h3 class="text-sm font-medium text-slate-500">Start Date</h3>
+                                            <p id="viewGoalStartDate" class="text-slate-700"></p>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-sm font-medium text-slate-500">Target Due Date</h3>
+                                            <p id="viewGoalTargetDueDate" class="text-slate-700"></p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-sm font-medium text-slate-500">Target Outcome</h3>
+                                        <p id="viewGoalTargetMeasure" class="text-slate-700"></p>
+                                        <p id="viewGoalTargetDetailValue" class="text-lg font-semibold text-indigo-600">
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-sm font-medium text-slate-500">Notes</h3>
+                                        <p id="viewGoalNotes" class="text-slate-700 whitespace-pre-wrap"></p>
+                                    </div>
+
+                                    <div class="mt-6 pt-4 border-t border-slate-200">
+                                        <h3 class="text-lg font-semibold text-slate-700 mb-3">Breakdown</h3>
+
+                                        <div class="ml-4 mb-4 p-3 bg-slate-50 rounded-lg">
+                                            <div class="flex justify-between items-center">
+                                                <h4 class="text-md font-medium text-slate-600">Sub-Goal 1: Dietary
+                                                    Adjustments</h4>
+                                                <span class="text-xs text-slate-500">Status: In Progress</span>
+                                            </div>
+                                            <p class="text-xs text-slate-500 mt-1">Target: Reduce daily caloric intake
+                                                by 500 kcal.</p>
+
+                                            <div class="ml-6 mt-3 space-y-2">
+                                                <div class="flex items-center p-2 bg-white rounded-md shadow-sm">
+                                                    <input type="checkbox"
+                                                        class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 mr-2"
+                                                        id="task1_1" checked>
+                                                    <label for="task1_1" class="text-sm text-slate-700">Task 1.1: Track
+                                                        daily food intake using a journal.</label>
+                                                </div>
+                                                <div class="flex items-center p-2 bg-white rounded-md shadow-sm">
+                                                    <input type="checkbox"
+                                                        class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 mr-2"
+                                                        id="task1_2">
+                                                    <label for="task1_2" class="text-sm text-slate-700">Task 1.2:
+                                                        Consult with dietitian for meal plan.</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="ml-4 mb-4 p-3 bg-slate-50 rounded-lg">
+                                            <div class="flex justify-between items-center">
+                                                <h4 class="text-md font-medium text-slate-600">Sub-Goal 2: Increase
+                                                    Physical Activity</h4>
+                                                <span class="text-xs text-slate-500">Status: Planned</span>
+                                            </div>
+                                            <p class="text-xs text-slate-500 mt-1">Target: 30 minutes of moderate
+                                                exercise, 5 days a week.</p>
+
+                                            <div class="ml-6 mt-3 space-y-2">
+                                                <div class="flex items-center p-2 bg-white rounded-md shadow-sm">
+                                                    <input type="checkbox"
+                                                        class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 mr-2"
+                                                        id="task2_1">
+                                                    <label for="task2_1" class="text-sm text-slate-700">Task 2.1:
+                                                        Schedule daily walks.</label>
+                                                </div>
+                                                <div class="flex items-center p-2 bg-white rounded-md shadow-sm">
+                                                    <input type="checkbox"
+                                                        class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 mr-2"
+                                                        id="task2_2">
+                                                    <label for="task2_2" class="text-sm text-slate-700">Task 2.2: Join a
+                                                        local fitness group.</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-6 text-right">
+                                        <button type="button"
+                                            class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors shadow-md hover:shadow-lg">
+                                            Update Goal
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
 
                     <div id="rightSidebarColumn" class="lg:col-span-5 xl:col-span-4 flex flex-col space-y-6">
                         <div class="dashboard-card bg-rose-50 border border-rose-200 flex flex-col">
                             <div class="flex justify-between items-center mb-4">
                                 <h2 class="text-xl font-semibold text-rose-700">Need Attention (3)</h2>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-md text-rose-600">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286zm0 13.036h.008v.008H12v-.008z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="icon-md text-rose-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286zm0 13.036h.008v.008H12v-.008z" />
                                 </svg>
                             </div>
                             <ul class="space-y-3">
-                                <li class="interactive-list-item flex items-start p-3 bg-white rounded-lg shadow-sm border border-red-300 hover:border-red-400">
+                                <li
+                                    class="interactive-list-item flex items-start p-3 bg-white rounded-lg shadow-sm border border-red-300 hover:border-red-400">
                                     <span class="p-1.5 bg-red-100 rounded-full mr-3 mt-0.5 flex-shrink-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="icon-xs text-red-600">
-                                          <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                            class="icon-xs text-red-600">
+                                            <path fill-rule="evenodd"
+                                                d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z"
+                                                clip-rule="evenodd" />
                                         </svg>
                                     </span>
                                     <div class="flex-1 min-w-0">
-                                        <p class="font-medium text-sm text-red-700 truncate">Critical Lab: Potassium 5.8 mEq/L</p>
+                                        <p class="font-medium text-sm text-red-700 truncate">Critical Lab: Potassium 5.8
+                                            mEq/L</p>
                                         <p class="text-xs text-slate-500">Flagged: 1 hour ago by System</p>
                                     </div>
-                                    <button class="ml-2 px-3 py-1 text-xs font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1 transition-colors flex-shrink-0">Review</button>
+                                    <button
+                                        class="ml-2 px-3 py-1 text-xs font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1 transition-colors flex-shrink-0">Review</button>
                                 </li>
-                                <li class="interactive-list-item flex items-start p-3 bg-white rounded-lg shadow-sm border border-amber-300 hover:border-amber-400">
+                                <li
+                                    class="interactive-list-item flex items-start p-3 bg-white rounded-lg shadow-sm border border-amber-300 hover:border-amber-400">
                                     <span class="p-1.5 bg-amber-100 rounded-full mr-3 mt-0.5 flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="icon-xs text-amber-600">
-                                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z" clip-rule="evenodd" />
-                                    </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                            class="icon-xs text-amber-600">
+                                            <path fill-rule="evenodd"
+                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z"
+                                                clip-rule="evenodd" />
+                                        </svg>
                                     </span>
                                     <div class="flex-1 min-w-0">
-                                        <p class="font-medium text-sm text-amber-700 truncate">Medication Refill Due: Atorvastatin</p>
+                                        <p class="font-medium text-sm text-amber-700 truncate">Medication Refill Due:
+                                            Atorvastatin</p>
                                         <p class="text-xs text-slate-500">Due: Tomorrow</p>
                                     </div>
-                                     <button class="ml-2 px-3 py-1 text-xs font-medium text-white bg-amber-500 rounded-md hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-1 transition-colors flex-shrink-0">Process</button>
+                                    <button
+                                        class="ml-2 px-3 py-1 text-xs font-medium text-white bg-amber-500 rounded-md hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-1 transition-colors flex-shrink-0">Process</button>
                                 </li>
-                                 <li class="interactive-list-item flex items-start p-3 bg-white rounded-lg shadow-sm border border-blue-300 hover:border-blue-400">
-                                     <span class="p-1.5 bg-blue-100 rounded-full mr-3 mt-0.5 flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="icon-xs text-blue-600">
-                                      <path d="M3.5 4A1.5 1.5 0 002 5.5v9A1.5 1.5 0 003.5 16h13a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0016.5 4h-13zM12 7a1 1 0 011 1v1a1 1 0 11-2 0V8a1 1 0 011-1zm-3 2a1 1 0 100-2 1 1 0 000 2zM8 7a1 1 0 011 1v1a1 1 0 11-2 0V8a1 1 0 011-1zm5 4a1 1 0 100-2 1 1 0 000 2zM7 12a1 1 0 11-2 0 1 1 0 012 0zm3 1a1 1 0 100-2 1 1 0 000 2z" />
-                                      <path d="M2.5 18a.5.5 0 000 1h15a.5.5 0 000-1h-15z" />
-                                    </svg>
+                                <li
+                                    class="interactive-list-item flex items-start p-3 bg-white rounded-lg shadow-sm border border-blue-300 hover:border-blue-400">
+                                    <span class="p-1.5 bg-blue-100 rounded-full mr-3 mt-0.5 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                            class="icon-xs text-blue-600">
+                                            <path
+                                                d="M3.5 4A1.5 1.5 0 002 5.5v9A1.5 1.5 0 003.5 16h13a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0016.5 4h-13zM12 7a1 1 0 011 1v1a1 1 0 11-2 0V8a1 1 0 011-1zm-3 2a1 1 0 100-2 1 1 0 000 2zM8 7a1 1 0 011 1v1a1 1 0 11-2 0V8a1 1 0 011-1zm5 4a1 1 0 100-2 1 1 0 000 2zM7 12a1 1 0 11-2 0 1 1 0 012 0zm3 1a1 1 0 100-2 1 1 0 000 2z" />
+                                            <path d="M2.5 18a.5.5 0 000 1h15a.5.5 0 000-1h-15z" />
+                                        </svg>
                                     </span>
                                     <div class="flex-1 min-w-0">
-                                        <p class="font-medium text-sm text-blue-700 truncate">Unread Message from Patient</p>
+                                        <p class="font-medium text-sm text-blue-700 truncate">Unread Message from
+                                            Patient</p>
                                         <p class="text-xs text-slate-500">Received: 2 hours ago</p>
                                     </div>
-                                     <button class="ml-2 px-3 py-1 text-xs font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-colors flex-shrink-0">View</button>
+                                    <button
+                                        class="ml-2 px-3 py-1 text-xs font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-colors flex-shrink-0">View</button>
                                 </li>
                             </ul>
                         </div>
-                         <div class="dashboard-card bg-sky-50 border border-sky-200 flex flex-col">
+                        <div class="dashboard-card bg-sky-50 border border-sky-200 flex flex-col">
                             <h2 class="text-xl font-semibold text-sky-700 mb-4">Care Plan Suggestions</h2>
                             <div class="space-y-3">
-                                <div class="p-3 bg-white rounded-lg shadow-sm border border-sky-200 hover:border-sky-300 flex flex-col sm:flex-row justify-between sm:items-center interactive-list-item">
+                                <div
+                                    class="p-3 bg-white rounded-lg shadow-sm border border-sky-200 hover:border-sky-300 flex flex-col sm:flex-row justify-between sm:items-center interactive-list-item">
                                     <div class="flex-1 min-w-0">
-                                        <p class="text-sm font-medium text-sky-800">Consider SGLT2 inhibitor for diabetes & CVD risk.</p>
-                                        <p class="text-xs text-slate-500"><span class="font-semibold text-sky-600">Priority: High</span> | Rationale: High HbA1c, Atherosclerosis.</p>
+                                        <p class="text-sm font-medium text-sky-800">Consider SGLT2 inhibitor for
+                                            diabetes & CVD risk.</p>
+                                        <p class="text-xs text-slate-500"><span
+                                                class="font-semibold text-sky-600">Priority: High</span> | Rationale:
+                                            High HbA1c, Atherosclerosis.</p>
                                     </div>
-                                    <button class="mt-2 sm:mt-0 sm:ml-4 px-4 py-2 text-xs font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-all duration-150 ease-in-out shadow-md hover:shadow-lg flex-shrink-0">
+                                    <button
+                                        class="mt-2 sm:mt-0 sm:ml-4 px-4 py-2 text-xs font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-all duration-150 ease-in-out shadow-md hover:shadow-lg flex-shrink-0">
                                         Add to Plan
                                     </button>
                                 </div>
-                                <div class="p-3 bg-white rounded-lg shadow-sm border border-sky-200 hover:border-sky-300 flex flex-col sm:flex-row justify-between sm:items-center interactive-list-item">
+                                <div
+                                    class="p-3 bg-white rounded-lg shadow-sm border border-sky-200 hover:border-sky-300 flex flex-col sm:flex-row justify-between sm:items-center interactive-list-item">
                                     <div class="flex-1 min-w-0">
-                                        <p class="text-sm font-medium text-sky-800">Refer to dietitian for personalized meal planning.</p>
-                                        <p class="text-xs text-slate-500"><span class="font-semibold text-sky-600">Priority: Medium</span> | Rationale: Irregular meals, weight gain.</p>
+                                        <p class="text-sm font-medium text-sky-800">Refer to dietitian for personalized
+                                            meal planning.</p>
+                                        <p class="text-xs text-slate-500"><span
+                                                class="font-semibold text-sky-600">Priority: Medium</span> | Rationale:
+                                            Irregular meals, weight gain.</p>
                                     </div>
-                                    <button class="mt-2 sm:mt-0 sm:ml-4 px-4 py-2 text-xs font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-all duration-150 ease-in-out shadow-md hover:shadow-lg flex-shrink-0">
+                                    <button
+                                        class="mt-2 sm:mt-0 sm:ml-4 px-4 py-2 text-xs font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-all duration-150 ease-in-out shadow-md hover:shadow-lg flex-shrink-0">
                                         Create Referral
                                     </button>
                                 </div>
@@ -601,7 +941,7 @@
         const patientDrawer = document.getElementById('patientDrawer');
         const openDrawerButton = document.getElementById('openDrawerButton');
         const closeDrawerButton = document.getElementById('closeDrawerButton');
-        const contentWrapper = document.getElementById('contentWrapper'); 
+        const contentWrapper = document.getElementById('contentWrapper');
         const drawerOverlay = document.getElementById('drawerOverlay');
 
         const middleColumn = document.getElementById('middleColumn');
@@ -609,7 +949,8 @@
         const orderCreationView = document.getElementById('orderCreationView');
         const conditionCreationView = document.getElementById('conditionCreationView');
         const goalCreationView = document.getElementById('goalCreationView');
-        
+        const goalDetailView = document.getElementById('goalDetailView');
+
         const addOrderBtn = document.getElementById('addOrderButton');
         const addConditionBtn = document.getElementById('addConditionButton');
         const addGoalBtn = document.getElementById('addGoalButton');
@@ -620,54 +961,111 @@
         const cancelConditionBtn = document.getElementById('cancelConditionButton');
         const backToDashboardFromGoalBtn = document.getElementById('backToDashboardFromGoal');
         const cancelGoalBtn = document.getElementById('cancelGoalButton');
+        const backToDashboardFromGoalDetailBtn = document.getElementById('backToDashboardFromGoalDetail');
+
+        // Placeholder data for goals (in a real app, this would come from a backend)
+        const goalsData = {
+            cholesterol: {
+                description: "Reduce Cholesterol",
+                lifecycleStatus: "Active",
+                category: "Dietary",
+                startDate: "2025-05-20",
+                targetMeasure: "Total Cholesterol",
+                targetDetailValue: "< 180 mg/dL",
+                targetDueDate: "2025-12-19",
+                notes: "Focus on low-fat diet and increased physical activity. Monitor lipid panel quarterly."
+            },
+            liver: {
+                description: "Improve Liver Function",
+                lifecycleStatus: "Active",
+                category: "Medical",
+                startDate: "2025-05-20",
+                targetMeasure: "Total Bilirubin",
+                targetDetailValue: "< 1.2 mg/dL",
+                targetDueDate: "2025-08-20",
+                notes: "Monitor liver enzymes and bilirubin levels. Avoid hepatotoxic medications."
+            },
+            bloodsugar: {
+                description: "Blood Sugar Control",
+                lifecycleStatus: "Active",
+                category: "Medical Management",
+                startDate: "2025-01-15",
+                targetMeasure: "HbA1c",
+                targetDetailValue: "< 7.0%",
+                targetDueDate: "2025-07-15",
+                notes: "Adherence to diabetic diet, regular glucose monitoring, and prescribed medications."
+            }
+        };
+
+        function populateGoalDetailView(goalId) {
+            const goal = goalsData[goalId];
+            if (goal) {
+                document.getElementById('viewGoalDescription').textContent = goal.description;
+                document.getElementById('viewGoalLifecycleStatus').textContent = goal.lifecycleStatus;
+                document.getElementById('viewGoalCategory').textContent = goal.category;
+                document.getElementById('viewGoalStartDate').textContent = goal.startDate;
+                document.getElementById('viewGoalTargetDueDate').textContent = goal.targetDueDate || 'N/A';
+                document.getElementById('viewGoalTargetMeasure').textContent = goal.targetMeasure;
+                document.getElementById('viewGoalTargetDetailValue').textContent = goal.targetDetailValue;
+                document.getElementById('viewGoalNotes').textContent = goal.notes || 'No additional notes.';
+            }
+        }
 
 
-        function showView(viewName) {
+        function showView(viewName, viewId) {
             // Hide all views within the middle column
             dashboardView.classList.add('view-hidden');
             orderCreationView.classList.add('view-hidden');
             conditionCreationView.classList.add('view-hidden');
             goalCreationView.classList.add('view-hidden');
-            
+            goalDetailView.classList.add('view-hidden');
+
             if (viewName === 'orderCreation') {
                 orderCreationView.classList.remove('view-hidden');
             } else if (viewName === 'conditionCreation') {
                 conditionCreationView.classList.remove('view-hidden');
             } else if (viewName === 'goalCreation') {
                 goalCreationView.classList.remove('view-hidden');
-            } else { 
+            } else if (viewName === 'goalDetail') {
+                populateGoalDetailView(viewId);
+                goalDetailView.classList.remove('view-hidden');
+            }
+            else {
                 dashboardView.classList.remove('view-hidden');
             }
         }
 
         function routeHandler() {
             const hash = window.location.hash;
-            if (hash === '#create-order') {
+            if (hash.startsWith('#view-goal-')) {
+                const goalId = hash.substring('#view-goal-'.length);
+                showView('goalDetail', goalId);
+            } else if (hash === '#create-order') {
                 showView('orderCreation');
             } else if (hash === '#add-condition') {
                 showView('conditionCreation');
             } else if (hash === '#add-goal') {
                 showView('goalCreation');
             }
-             else {
+            else {
                 showView('dashboard');
             }
         }
 
         if (addOrderBtn) {
-            addOrderBtn.addEventListener('click', function(event) {
+            addOrderBtn.addEventListener('click', function (event) {
                 event.preventDefault();
                 window.location.hash = '#create-order';
             });
         }
         if (addConditionBtn) {
-            addConditionBtn.addEventListener('click', function(event) {
+            addConditionBtn.addEventListener('click', function (event) {
                 event.preventDefault();
                 window.location.hash = '#add-condition';
             });
         }
         if (addGoalBtn) {
-            addGoalBtn.addEventListener('click', function(event) {
+            addGoalBtn.addEventListener('click', function (event) {
                 event.preventDefault();
                 window.location.hash = '#add-goal';
             });
@@ -684,8 +1082,9 @@
         if (cancelConditionBtn) cancelConditionBtn.addEventListener('click', goBackToDashboard);
         if (backToDashboardFromGoalBtn) backToDashboardFromGoalBtn.addEventListener('click', goBackToDashboard);
         if (cancelGoalBtn) cancelGoalBtn.addEventListener('click', goBackToDashboard);
-        
-        
+        if (backToDashboardFromGoalDetailBtn) backToDashboardFromGoalDetailBtn.addEventListener('click', goBackToDashboard);
+
+
         window.addEventListener('load', routeHandler);
         window.addEventListener('hashchange', routeHandler);
 
@@ -695,10 +1094,10 @@
                 patientDrawer.classList.add('translate-x-0');
                 contentWrapper.classList.add('lg:ml-80');
             }
-            if(drawerOverlay && window.innerWidth < 1024) { 
+            if (drawerOverlay && window.innerWidth < 1024) {
                 drawerOverlay.classList.remove('hidden');
             }
-             if (window.innerWidth < 1024) { 
+            if (window.innerWidth < 1024) {
                 document.body.style.overflow = 'hidden';
             }
         }
@@ -709,27 +1108,28 @@
                 patientDrawer.classList.add('-translate-x-full');
                 contentWrapper.classList.remove('lg:ml-80');
             }
-             if(drawerOverlay) {
+            if (drawerOverlay) {
                 drawerOverlay.classList.add('hidden');
             }
-            document.body.style.overflow = ''; 
+            document.body.style.overflow = '';
         }
-        
-        if (window.innerWidth >= 1024) { 
-             openDrawer(); 
+
+        if (window.innerWidth >= 1024) {
+            openDrawer();
         } else {
-            closeDrawer(); 
+            closeDrawer();
         }
 
         if (openDrawerButton) openDrawerButton.addEventListener('click', openDrawer);
         if (closeDrawerButton) closeDrawerButton.addEventListener('click', closeDrawer);
         if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
 
-        document.addEventListener('keydown', function(event) {
+        document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape' && patientDrawer && !patientDrawer.classList.contains('-translate-x-full')) {
                 closeDrawer();
             }
         });
     </script>
 </body>
+
 </html>
