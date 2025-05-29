@@ -161,7 +161,7 @@
             <main class="p-4 md:p-6">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     
-                    <div id="middleColumn" class="lg:col-span-7 xl:col-span-8 space-y-6">
+                    <div id="middleColumn" class="lg:col-span-7 xl:col-span-8">
                         <div id="dashboardView" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="dashboard-card md:col-span-2 flex flex-col">
                                 <h2 class="text-xl font-semibold text-slate-700 mb-4">Care Plan Summary</h2>
@@ -360,7 +360,7 @@
                             </div>
                         </div>
 
-                        <div id="orderCreationView" class="lg:col-span-2 md:col-span-2 view-hidden">
+                        <div id="orderCreationView" class="view-hidden"> 
                             <div class="dashboard-card">
                                 <div class="flex justify-between items-center mb-6">
                                     <h2 class="text-2xl font-semibold text-slate-800">Create New Order</h2>
@@ -409,7 +409,7 @@
                             </div>
                         </div>
 
-                        <div id="conditionCreationView" class="lg:col-span-2 md:col-span-2 view-hidden">
+                        <div id="conditionCreationView" class="view-hidden"> 
                             <div class="dashboard-card">
                                 <div class="flex justify-between items-center mb-6">
                                     <h2 class="text-2xl font-semibold text-slate-800">Add New Condition</h2>
@@ -473,8 +473,8 @@
                                 </form>
                             </div>
                         </div>
-
-                        <div id="goalCreationView" class="lg:col-span-2 md:col-span-2 view-hidden">
+                        
+                        <div id="goalCreationView" class="view-hidden"> 
                             <div class="dashboard-card">
                                 <div class="flex justify-between items-center mb-6">
                                     <h2 class="text-2xl font-semibold text-slate-800">Create New Goal</h2>
@@ -558,7 +558,7 @@
                             </div>
                         </div>
                         
-                        <div id="goalDetailView" class="lg:col-span-2 md:col-span-2 view-hidden">
+                        <div id="goalDetailView" class="view-hidden"> 
                             <div class="dashboard-card">
                                 <div class="flex justify-between items-center mb-6">
                                     <h2 class="text-2xl font-semibold text-slate-800">Goal Details</h2>
@@ -623,7 +623,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="addSubGoalView" class="lg:col-span-2 md:col-span-2 view-hidden">
+
+                        <div id="addSubGoalView" class="view-hidden"> 
                             <div class="dashboard-card">
                                 <div class="flex justify-between items-center mb-6">
                                     <h2 class="text-2xl font-semibold text-slate-800">Add Sub-Goal</h2>
@@ -673,7 +674,8 @@
                                 </form>
                             </div>
                         </div>
-                        <div id="addTaskView" class="lg:col-span-2 md:col-span-2 view-hidden">
+
+                        <div id="addTaskView" class="view-hidden"> 
                             <div class="dashboard-card">
                                 <div class="flex justify-between items-center mb-4">
                                     <h2 class="text-2xl font-semibold text-slate-800">Task Management</h2>
@@ -761,9 +763,7 @@
                         </div>
 
 
-                    </div>
-
-                    <div id="rightSidebarColumn" class="lg:col-span-5 xl:col-span-4 flex flex-col space-y-6">
+                    </div> <div id="rightSidebarColumn" class="lg:col-span-5 xl:col-span-4 flex flex-col space-y-6">
                         <div class="dashboard-card bg-rose-50 border border-rose-200 flex flex-col">
                             <div class="flex justify-between items-center mb-4">
                                 <h2 class="text-xl font-semibold text-rose-700">Need Attention (3)</h2>
@@ -834,15 +834,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </main>
-        </div>
-    </div>
-
-    <div id="drawerOverlay" class="fixed inset-0 bg-black bg-opacity-30 z-30 hidden"></div>
+                    </div> </div> </main>
+        </div> </div> <div id="drawerOverlay" class="fixed inset-0 bg-black bg-opacity-30 z-30 hidden"></div>
 
     <script>
+        // DOM Element References
         const patientDrawer = document.getElementById('patientDrawer');
         const openDrawerButton = document.getElementById('openDrawerButton');
         const closeDrawerButton = document.getElementById('closeDrawerButton');
@@ -858,6 +854,7 @@
         const addSubGoalView = document.getElementById('addSubGoalView');
         const addTaskView = document.getElementById('addTaskView');
         
+        // Button References for Adding Items
         const addOrderBtn = document.getElementById('addOrderButton');
         const addConditionBtn = document.getElementById('addConditionButton');
         const addGoalBtn = document.getElementById('addGoalButton');
@@ -865,12 +862,14 @@
         const navigateToTaskFormButton = document.getElementById('navigateToTaskFormButton'); 
         const addSubGoalToDetailViewButton = document.getElementById('addSubGoalToDetailViewButton');
         
+        // References for Sub-Goal and Task creation/linking within forms
         const subGoalsDisplayContainer = document.getElementById('subGoalsDisplayContainer'); 
         const tasksForSubGoalContainer = document.getElementById('tasksForSubGoalContainer'); 
         const taskSearchInputSubGoal = document.getElementById('taskSearchInputSubGoal'); 
         const taskSearchButtonSubGoal = document.getElementById('taskSearchButtonSubGoal'); 
         const taskSearchResultsContainerSubGoal = document.getElementById('taskSearchResultsContainerSubGoal'); 
 
+        // References for Task Management View (Tabs, Search, etc.)
         const taskManagementSearchInput = document.getElementById('taskManagementSearchInput');
         const taskManagementSearchButton = document.getElementById('taskManagementSearchButton');
         const taskManagementSearchResults = document.getElementById('taskManagementSearchResults');
@@ -879,7 +878,7 @@
         const createTaskFormSection = document.getElementById('createTaskFormSection');
         const linkTaskFormSection = document.getElementById('linkTaskFormSection');
 
-
+        // Back/Cancel Button References
         const backToDashboardFromOrderBtn = document.getElementById('backToDashboardFromOrder');
         const cancelOrderBtn = document.getElementById('cancelOrderButton');
         const backToDashboardFromConditionBtn = document.getElementById('backToDashboardFromCondition');
@@ -891,23 +890,22 @@
         const cancelSubGoalBtn = document.getElementById('cancelSubGoalButton');
         const backToSubGoalFromTaskBtn = document.getElementById('backToSubGoalFromTask'); 
         const cancelTaskBtn = document.getElementById('cancelTaskButton');
-        // const backFromTaskManagementBtn = document.getElementById('backFromTaskManagement'); // This ID was for a view that is now part of addTaskView
 
-
+        // Temporary data stores for form building
         let tempSubGoals = []; 
         let tempTasksForSubGoal = []; 
         let currentViewingGoalId = null; 
         let currentParentGoalForSubGoal = null; 
         let currentParentSubGoalForTask = null; 
-        let taskManagementReturnHash = '#dashboard'; 
+        // let taskManagementReturnHash = '#dashboard'; // Not currently used, navigation is handled by dataset attributes
 
+        // Mock Data (Simulates backend data)
         const existingTasksData = [
             { id: "task_existing_1", description: "Review medication adherence quarterly", status: "planned", priority: "routine", owner: "Pharmacist"},
             { id: "task_existing_2", description: "Schedule follow-up appointment in 3 months", status: "requested", priority: "routine", owner: "Scheduler"},
             { id: "task_existing_3", description: "Educate patient on home blood pressure monitoring", status: "in-progress", priority: "medium", owner: "Nurse Educator"},
             { id: "task_existing_4", description: "Perform annual foot exam", status: "planned", priority: "routine", owner: "Podiatrist"},
         ];
-
 
         const goalsData = {
             cholesterol: {
@@ -980,6 +978,7 @@
             }
         };
 
+        // Function to populate the Goal Detail View
         function populateGoalDetailView(goalId) {
             currentViewingGoalId = goalId; 
             const goal = goalsData[goalId];
@@ -1042,26 +1041,28 @@
             }
         }
         
+        // Event Listeners for Navigation to Sub-Goal/Task Forms
         if (navigateToSubGoalFormButton) { 
             navigateToSubGoalFormButton.addEventListener('click', () => {
-                currentParentGoalForSubGoal = 'temp_main_goal'; 
+                currentParentGoalForSubGoal = 'temp_main_goal'; // Indicates a new main goal is being created
                 window.location.hash = '#add-sub-goal?from=goalCreation'; 
             });
         }
          if (addSubGoalToDetailViewButton) { 
             addSubGoalToDetailViewButton.addEventListener('click', () => {
+                // currentViewingGoalId is set when goal detail view is populated
                 window.location.hash = `#add-sub-goal?parentGoalId=${currentViewingGoalId}&from=goalDetail`;
             });
         }
 
-
         if (navigateToTaskFormButton) { 
              navigateToTaskFormButton.addEventListener('click', () => {
-                currentParentSubGoalForTask = 'temp_sub_goal'; 
-                window.location.hash = '#add-task?from=subGoalCreation'; // From AddSubGoal view
+                currentParentSubGoalForTask = 'temp_sub_goal'; // Indicates a new sub-goal is being created
+                window.location.hash = '#add-task?from=subGoalCreation'; 
             });
         }
         
+        // Event Listener for "Add Tasks" button within Goal Detail's Sub-Goal list
         document.getElementById('viewGoalBreakdownContainer')?.addEventListener('click', function(event) {
             const target = event.target.closest('button'); 
             if (target && target.classList.contains('manageSubGoalTasksButton')) {
@@ -1072,6 +1073,7 @@
             }
         });
 
+        // Event Listener for Task Search within Add Sub-Goal View
         if (taskSearchButtonSubGoal) { 
             taskSearchButtonSubGoal.addEventListener('click', () => {
                 const searchTerm = taskSearchInputSubGoal.value.toLowerCase();
@@ -1085,7 +1087,7 @@
                         taskDiv.className = 'p-2 border rounded-md hover:bg-indigo-50 cursor-pointer text-sm';
                         taskDiv.textContent = `${task.description} (Owner: ${task.owner})`;
                         taskDiv.dataset.taskId = task.id;
-                        taskDiv.addEventListener('click', () => linkExistingTask(task)); 
+                        taskDiv.addEventListener('click', () => linkExistingTaskToTempSubGoal(task)); 
                         taskSearchResultsContainerSubGoal.appendChild(taskDiv);
                     });
                 } else {
@@ -1094,15 +1096,23 @@
             });
         }
 
-        function linkExistingTask(taskData) { 
+        // Function to link an existing task to the temporary sub-goal being created
+        function linkExistingTaskToTempSubGoal(taskData) { 
             if (tempTasksForSubGoal.find(t => t.id === taskData.id)) {
-                alert("This task is already linked to the sub-goal.");
+                // Using a simple browser alert for now, replace with modal if needed
+                console.warn("This task is already linked to the sub-goal.");
+                const existingItem = tasksForSubGoalContainer.querySelector(`[data-task-id="${taskData.id}"]`);
+                if (existingItem) {
+                    existingItem.classList.add('bg-yellow-100', 'border-yellow-400');
+                    setTimeout(() => existingItem.classList.remove('bg-yellow-100', 'border-yellow-400'), 1500);
+                }
                 return;
             }
             tempTasksForSubGoal.push({...taskData, isExisting: true }); 
             
             const taskDisplayItem = document.createElement('div');
             taskDisplayItem.className = 'p-1.5 border rounded-md bg-green-50 text-xs ml-4 flex justify-between items-center';
+            taskDisplayItem.dataset.taskId = taskData.id; // For potential unlinking
             taskDisplayItem.innerHTML = `
                 <span>Task: ${taskData.description} (Linked)</span>
                 <button type="button" class="unlinkTaskButton text-red-500 hover:text-red-700 text-xs" data-task-id="${taskData.id}">Unlink</button>
@@ -1112,6 +1122,7 @@
             taskSearchInputSubGoal.value = '';
         }
 
+        // Event Listener for Unlinking Tasks in Add Sub-Goal View
         tasksForSubGoalContainer.addEventListener('click', function(event) {
             if (event.target && event.target.classList.contains('unlinkTaskButton')) {
                 const taskIdToUnlink = event.target.dataset.taskId;
@@ -1119,7 +1130,8 @@
                 event.target.parentElement.remove(); 
             }
         });
-
+        
+        // Event Listener for Task Search within Task Management Tab (Link Existing)
         if (taskManagementSearchButton) {
             taskManagementSearchButton.addEventListener('click', () => {
                 const searchTerm = taskManagementSearchInput.value.toLowerCase();
@@ -1137,7 +1149,7 @@
                         taskDiv.className = 'p-2 border rounded-md hover:bg-indigo-50 cursor-pointer text-sm flex justify-between items-center';
                         taskDiv.innerHTML = `<span>${task.description} (Owner: ${task.owner})</span>
                                            <button class="linkThisTaskButtonDetailView px-2 py-1 text-xs bg-blue-500 text-white rounded hover:bg-blue-600" data-task-id="${task.id}">Link</button>`;
-                        taskDiv.querySelector('.linkThisTaskButtonDetailView').addEventListener('click', () => linkExistingTaskToSubGoalInDetail(task, currentParentSubGoalForTask, currentViewingGoalId));
+                        taskDiv.querySelector('.linkThisTaskButtonDetailView').addEventListener('click', () => linkExistingTaskToSubGoalInDetail(task, currentParentSubGoalForTask, addTaskView.dataset.returnToGoalId || currentViewingGoalId));
                         taskManagementSearchResults.appendChild(taskDiv);
                     });
                 } else {
@@ -1146,6 +1158,7 @@
             });
         }
         
+        // Function to link an existing task to a sub-goal when in the Goal Detail context
         function linkExistingTaskToSubGoalInDetail(taskData, subGoalId, parentGoalId) {
             const goal = goalsData[parentGoalId];
             if (goal && goal.subGoals) {
@@ -1153,17 +1166,23 @@
                 if (subGoal) {
                     if (!subGoal.tasks) subGoal.tasks = [];
                     if (subGoal.tasks.find(t => t.id === taskData.id)) {
-                        alert("This task is already linked to this sub-goal.");
+                        console.warn("This task is already linked to this sub-goal.");
+                        // Potentially show a message in the UI
                         return;
                     }
                     subGoal.tasks.push({...taskData, isExisting: true});
                     window.location.hash = `#view-goal-${parentGoalId}`; 
+                } else {
+                    console.error("Sub-goal not found for linking task:", subGoalId);
                 }
+            } else {
+                 console.error("Parent goal not found for linking task:", parentGoalId);
             }
         }
 
-
+        // Core View Switching Logic
         function showView(viewName, params = {}) {
+            // Hide all main views in the middle column
             dashboardView.classList.add('view-hidden');
             orderCreationView.classList.add('view-hidden');
             conditionCreationView.classList.add('view-hidden');
@@ -1172,57 +1191,82 @@
             addSubGoalView.classList.add('view-hidden');
             addTaskView.classList.add('view-hidden');
             
+            // Show the requested view and perform necessary setup
             if (viewName === 'orderCreation') {
                 orderCreationView.classList.remove('view-hidden');
+                document.getElementById('createOrderForm').reset();
             } else if (viewName === 'conditionCreation') {
                 conditionCreationView.classList.remove('view-hidden');
+                document.getElementById('createConditionForm').reset();
             } else if (viewName === 'goalCreation') {
                 goalCreationView.classList.remove('view-hidden');
+                document.getElementById('createGoalForm').reset();
+                if(subGoalsDisplayContainer) subGoalsDisplayContainer.innerHTML = ''; // Clear previous temp sub-goals
+                tempSubGoals = [];
             } else if (viewName === 'goalDetail') {
                 populateGoalDetailView(params.goalId);
                 goalDetailView.classList.remove('view-hidden');
             } else if (viewName === 'addSubGoal') {
                 document.getElementById('createSubGoalForm').reset();
-                tasksForSubGoalContainer.innerHTML = ''; 
+                if(tasksForSubGoalContainer) tasksForSubGoalContainer.innerHTML = ''; 
                 tempTasksForSubGoal = []; 
                 currentParentGoalForSubGoal = params.parentGoalId || 'temp_main_goal'; 
-                taskSearchResultsContainerSubGoal.innerHTML = ''; 
-                taskSearchInputSubGoal.value = '';
+                if(taskSearchResultsContainerSubGoal) taskSearchResultsContainerSubGoal.innerHTML = ''; 
+                if(taskSearchInputSubGoal) taskSearchInputSubGoal.value = '';
+                // Store where to return after saving/canceling this sub-goal
+                addSubGoalView.dataset.returnTo = params.from === 'goalDetail' ? `#view-goal-${params.parentGoalId}` : '#add-goal';
                 addSubGoalView.classList.remove('view-hidden');
             } else if (viewName === 'addTask') {
                 document.getElementById('createTaskForm').reset();
-                if(params.description) { // Pre-fill if coming from task management search
+                if(params.description) { 
                     document.getElementById('taskDescription').value = params.description;
                 }
                 currentParentSubGoalForTask = params.parentSubGoalId || 'temp_sub_goal'; 
                 
-                // Determine where to navigate back to
+                // Determine where to navigate back to after task creation/cancellation
                 if (params.from === 'goalDetail') {
                     addTaskView.dataset.returnTo = `#view-goal-${params.parentGoalId}`;
-                    addTaskView.dataset.returnToGoalId = params.parentGoalId;
+                    addTaskView.dataset.returnToGoalId = params.parentGoalId; // Store for linking existing task
                     addTaskView.dataset.returnToSubGoalId = params.parentSubGoalId;
                 } else if (params.from === 'subGoalCreation') {
-                     addTaskView.dataset.returnTo = `#add-sub-goal?from=goalCreation&parentGoalId=${currentParentGoalForSubGoal}`; // Assuming currentParentGoalForSubGoal is set
-                    if(currentParentGoalForSubGoal !== 'temp_main_goal') addTaskView.dataset.returnToGoalId = currentParentGoalForSubGoal; // if adding to existing goal's new sub-goal
-                    delete addTaskView.dataset.returnToSubGoalId; // Not returning to a specific sub-goal ID yet
-                } else { // Default or other cases
-                    addTaskView.dataset.returnTo = '#dashboard'; // Fallback
-                    delete addTaskView.dataset.returnToGoalId;
-                    delete addTaskView.dataset.returnToSubGoalId;
+                     const parentGoalForSubGoal = new URLSearchParams(window.location.hash.split('?')[1]).get('parentGoalId');
+                     const fromForSubGoal = new URLSearchParams(window.location.hash.split('?')[1]).get('from');
+                     if(fromForSubGoal === 'goalDetail' && parentGoalForSubGoal){
+                         addTaskView.dataset.returnTo = `#add-sub-goal?parentGoalId=${parentGoalForSubGoal}&from=goalDetail`;
+                     } else {
+                         addTaskView.dataset.returnTo = `#add-sub-goal?from=goalCreation`;
+                     }
+                } else { 
+                    addTaskView.dataset.returnTo = '#dashboard'; 
                 }
 
-                // Default to create tab
-                document.getElementById('createTaskFormSection').classList.remove('view-hidden');
-                document.getElementById('linkTaskFormSection').classList.add('view-hidden');
-                taskFormTabs.querySelector('[data-tab="create-task"]').classList.add('active');
-                taskFormTabs.querySelector('[data-tab="link-task"]').classList.remove('active');
+                // Default to 'create-task' tab
+                if(createTaskFormSection) createTaskFormSection.classList.remove('view-hidden');
+                if(linkTaskFormSection) linkTaskFormSection.classList.add('view-hidden');
+                if(taskFormTabs) {
+                    taskFormTabs.querySelector('[data-tab="create-task"]')?.classList.add('active');
+                    taskFormTabs.querySelector('[data-tab="link-task"]')?.classList.remove('active');
+                }
+                if(taskManagementSearchResults) taskManagementSearchResults.innerHTML = ''; // Clear previous search results
+                if(taskManagementSearchInput) taskManagementSearchInput.value = '';
+
                 addTaskView.classList.remove('view-hidden');
             }
-             else { 
+             else { // Default to dashboardView
                 dashboardView.classList.remove('view-hidden');
             }
+            
+            setTimeout(() => {
+                if (contentWrapper) { 
+                    contentWrapper.scrollTop = 0;
+                }
+                document.documentElement.scrollTop = 0; 
+                document.body.scrollTop = 0; 
+                window.scrollTo(0,0); 
+            }, 0); 
         }
 
+        // Routing Logic
         function routeHandler() {
             const hash = window.location.hash;
             const [path, queryString] = hash.split('?');
@@ -1239,7 +1283,7 @@
                 showView('goalCreation');
             } else if (path === '#add-sub-goal') {
                 showView('addSubGoal', { parentGoalId: params.get('parentGoalId'), from: params.get('from') });
-            } else if (path === '#add-task') { // This is the new consolidated task management view
+            } else if (path === '#add-task') { 
                  showView('addTask', { 
                     parentSubGoalId: params.get('parentSubGoalId'), 
                     parentGoalId: params.get('parentGoalId'), 
@@ -1248,10 +1292,11 @@
                 });
             }
              else {
-                showView('dashboard');
+                showView('dashboard'); // Default route
             }
         }
 
+        // Event Listeners for "Add" buttons on Dashboard
         if (addOrderBtn) {
             addOrderBtn.addEventListener('click', function(event) {
                 event.preventDefault();
@@ -1267,36 +1312,28 @@
         if (addGoalBtn) {
             addGoalBtn.addEventListener('click', function(event) {
                 event.preventDefault();
-                tempSubGoals = []; 
-                subGoalsDisplayContainer.innerHTML = '';
                 window.location.hash = '#add-goal';
             });
         }
 
-
+        // Navigation Helper Functions
         function goBackToDashboard() {
             window.location.hash = '#dashboard';
         }
         function goBackToGoalCreation() {
             window.location.hash = '#add-goal';
         }
-         function goBackIntelligently() { 
-            const returnTo = addTaskView.dataset.returnTo || addSubGoalView.dataset.returnTo || goalDetailView.dataset.returnTo || '#dashboard';
-            const returnToGoalId = addTaskView.dataset.returnToGoalId || addSubGoalView.dataset.returnToGoalId || goalDetailView.dataset.returnToGoalId;
-            
-            if (returnTo.startsWith('#view-goal-') && returnToGoalId) {
-                 window.location.hash = `#view-goal-${returnToGoalId}`; 
-            } else if (returnTo.startsWith('#add-sub-goal')) { // Check if it starts with, to include query params
-                 window.location.hash = returnTo;
-            } else if (returnTo.startsWith('#task-management') && currentViewingGoalId && currentParentSubGoalForTask) {
-                 window.location.hash = `#task-management?parentGoalId=${currentViewingGoalId}&parentSubGoalId=${currentParentSubGoalForTask}`;
-            }
-             else {
-                window.location.hash = returnTo; 
-            }
+        function goBackToSubGoalCreation() { // Used by task creation when coming from sub-goal form
+            const returnPath = addTaskView.dataset.returnTo || '#add-goal'; // Fallback
+            window.location.hash = returnPath;
+        }
+        function goBackFromSubGoalForm() {
+            const returnPath = addSubGoalView.dataset.returnTo || '#add-goal';
+            window.location.hash = returnPath;
         }
 
 
+        // Event Listeners for Back/Cancel Buttons
         if (backToDashboardFromOrderBtn) backToDashboardFromOrderBtn.addEventListener('click', goBackToDashboard);
         if (cancelOrderBtn) cancelOrderBtn.addEventListener('click', goBackToDashboard);
         if (backToDashboardFromConditionBtn) backToDashboardFromConditionBtn.addEventListener('click', goBackToDashboard);
@@ -1305,34 +1342,35 @@
         if (cancelGoalBtn) cancelGoalBtn.addEventListener('click', goBackToDashboard);
         if (backToDashboardFromGoalDetailBtn) backToDashboardFromGoalDetailBtn.addEventListener('click', goBackToDashboard);
         
-        if(backToGoalCreationFromSubGoalBtn) backToGoalCreationFromSubGoalBtn.addEventListener('click', () => {
-            const parentGoalId = new URLSearchParams(window.location.hash.split('?')[1]).get('parentGoalId');
-            const from = new URLSearchParams(window.location.hash.split('?')[1]).get('from');
-            if (from === 'goalDetail' && parentGoalId) {
-                window.location.hash = `#view-goal-${parentGoalId}`;
-            } else {
-                goBackToGoalCreation();
-            }
-        });
-        if(cancelSubGoalBtn) cancelSubGoalBtn.addEventListener('click', () => {
-            const parentGoalId = new URLSearchParams(window.location.hash.split('?')[1]).get('parentGoalId');
-            const from = new URLSearchParams(window.location.hash.split('?')[1]).get('from');
-            if (from === 'goalDetail' && parentGoalId) {
-                window.location.hash = `#view-goal-${parentGoalId}`;
-            } else {
-                goBackToGoalCreation();
-            }
-        });
+        if(backToGoalCreationFromSubGoalBtn) backToGoalCreationFromSubGoalBtn.addEventListener('click', goBackFromSubGoalForm);
+        if(cancelSubGoalBtn) cancelSubGoalBtn.addEventListener('click', goBackFromSubGoalForm);
 
-        if(backToSubGoalFromTaskBtn) backToSubGoalFromTaskBtn.addEventListener('click', goBackIntelligently);
-        if(cancelTaskBtn) cancelTaskBtn.addEventListener('click', goBackIntelligently);
+        if(backToSubGoalFromTaskBtn) backToSubGoalFromTaskBtn.addEventListener('click', goBackToSubGoalCreation);
+        if(cancelTaskBtn) cancelTaskBtn.addEventListener('click', goBackToSubGoalCreation);
         
         
+        // Form Submission Handlers (Simplified - data is not persisted beyond session)
         document.getElementById('createGoalForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
-            console.log("Main Goal Form Submitted with sub-goals:", tempSubGoals);
+            const goalDesc = document.getElementById('goalDescription').value;
+            const newGoalId = goalDesc.toLowerCase().replace(/\s+/g, '-') + '-' + Date.now();
+            goalsData[newGoalId] = {
+                id: newGoalId,
+                description: goalDesc,
+                lifecycleStatus: document.getElementById('goalLifecycleStatus').value,
+                category: document.getElementById('goalCategory').value,
+                startDate: document.getElementById('goalStartDate').value,
+                targetMeasure: document.getElementById('goalTargetMeasure').value,
+                targetDetailValue: document.getElementById('goalTargetDetailValue').value,
+                targetDueDate: document.getElementById('goalTargetDueDate').value,
+                notes: document.getElementById('goalNotes').value,
+                subGoals: [...tempSubGoals] 
+            };
+            console.log("Main Goal Form Submitted. New Goal:", goalsData[newGoalId]);
+            tempSubGoals = []; 
             goBackToDashboard();
         });
+
         document.getElementById('createSubGoalForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
             const subGoalDesc = document.getElementById('subGoalDescription').value;
@@ -1345,15 +1383,16 @@
             if (fromView === 'goalDetail' && parentGoalIdFromHash && goalsData[parentGoalIdFromHash]) {
                 if (!goalsData[parentGoalIdFromHash].subGoals) goalsData[parentGoalIdFromHash].subGoals = [];
                 goalsData[parentGoalIdFromHash].subGoals.push(newSubGoal);
-                window.location.hash = `#view-goal-${parentGoalIdFromHash}`;
+                window.location.hash = `#view-goal-${parentGoalIdFromHash}`; 
             } else { 
                 tempSubGoals.push(newSubGoal);
                 const subGoalDisplayItem = document.createElement('div');
                 subGoalDisplayItem.className = 'p-2 border rounded-md bg-slate-100 text-sm';
                 subGoalDisplayItem.textContent = `Sub-Goal: ${subGoalDesc} (Target: ${subGoalTarget || 'N/A'}) - ${tempTasksForSubGoal.length} task(s)`;
-                subGoalsDisplayContainer.appendChild(subGoalDisplayItem);
-                goBackToGoalCreation();
+                if(subGoalsDisplayContainer) subGoalsDisplayContainer.appendChild(subGoalDisplayItem);
+                goBackFromSubGoalForm(); 
             }
+            tempTasksForSubGoal = []; 
             console.log("Sub-Goal Form Submitted:", newSubGoal);
         });
 
@@ -1363,7 +1402,21 @@
             const taskStatus = document.getElementById('taskStatus').value;
             const taskPriority = document.getElementById('taskPriority').value;
             const taskOwner = document.getElementById('taskOwner').value;
-            const newTask = {id: `task-${Date.now()}`, description: taskDesc, completed: false, status: taskStatus, priority: taskPriority, owner: taskOwner};
+            const taskStartDate = document.getElementById('taskStartDate').value;
+            const taskEndDate = document.getElementById('taskEndDate').value;
+            const taskNotes = document.getElementById('taskNotes').value;
+
+            const newTask = {
+                id: `task-${Date.now()}`, 
+                description: taskDesc, 
+                completed: false, 
+                status: taskStatus, 
+                priority: taskPriority, 
+                owner: taskOwner,
+                startDate: taskStartDate,
+                endDate: taskEndDate,
+                notes: taskNotes
+            };
             
             const parentSubGoalIdFromHash = new URLSearchParams(window.location.hash.split('?')[1]).get('parentSubGoalId');
             const parentGoalIdFromHash = new URLSearchParams(window.location.hash.split('?')[1]).get('parentGoalId');
@@ -1374,9 +1427,9 @@
                 const taskDisplayItem = document.createElement('div');
                 taskDisplayItem.className = 'p-1.5 border rounded-md bg-white text-xs ml-4';
                 taskDisplayItem.textContent = `Task: ${taskDesc}`;
-                tasksForSubGoalContainer.appendChild(taskDisplayItem);
+                if(tasksForSubGoalContainer) tasksForSubGoalContainer.appendChild(taskDisplayItem);
                 goBackToSubGoalCreation(); 
-            } else if ((fromView === 'goalDetail' || fromView === 'taskManagement') && parentGoalIdFromHash && parentSubGoalIdFromHash) { 
+            } else if (fromView === 'goalDetail' && parentGoalIdFromHash && parentSubGoalIdFromHash) { 
                 const mainGoal = goalsData[parentGoalIdFromHash];
                 if(mainGoal && mainGoal.subGoals){
                     const subGoal = mainGoal.subGoals.find(sg => sg.id === parentSubGoalIdFromHash);
@@ -1385,20 +1438,22 @@
                         subGoal.tasks.push(newTask);
                     }
                 }
-                window.location.hash = `#view-goal-${parentGoalIdFromHash}`;
+                window.location.hash = `#view-goal-${parentGoalIdFromHash}`; 
             }
             console.log("Task Form Submitted:", newTask);
         });
         
         
+        // Initialize routing on page load and listen for hash changes
         window.addEventListener('load', routeHandler);
         window.addEventListener('hashchange', routeHandler);
 
+        // Drawer Open/Close Logic
         function openDrawer() {
             if (patientDrawer) {
                 patientDrawer.classList.remove('-translate-x-full');
                 patientDrawer.classList.add('translate-x-0');
-                contentWrapper.classList.add('lg:ml-80');
+                contentWrapper.classList.add('lg:ml-80'); 
             }
             if(drawerOverlay && window.innerWidth < 1024) { 
                 drawerOverlay.classList.remove('hidden');
@@ -1428,7 +1483,7 @@
 
         if (openDrawerButton) openDrawerButton.addEventListener('click', openDrawer);
         if (closeDrawerButton) closeDrawerButton.addEventListener('click', closeDrawer);
-        if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+        if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer); 
 
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape' && patientDrawer && !patientDrawer.classList.contains('-translate-x-full')) {
@@ -1443,11 +1498,11 @@
                 e.target.classList.add('active');
 
                 if (tab === 'create-task') {
-                    createTaskFormSection.classList.remove('view-hidden');
-                    linkTaskFormSection.classList.add('view-hidden');
+                    if(createTaskFormSection) createTaskFormSection.classList.remove('view-hidden');
+                    if(linkTaskFormSection) linkTaskFormSection.classList.add('view-hidden');
                 } else if (tab === 'link-task') {
-                    createTaskFormSection.classList.add('view-hidden');
-                    linkTaskFormSection.classList.remove('view-hidden');
+                    if(createTaskFormSection) createTaskFormSection.classList.add('view-hidden');
+                    if(linkTaskFormSection) linkTaskFormSection.classList.remove('view-hidden');
                 }
             }
         });
