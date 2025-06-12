@@ -116,6 +116,7 @@
 <body class="bg-gray-100">
 
     <div class="flex min-h-screen">
+        <!-- Patient Drawer (Sidebar) -->
         <aside id="patientDrawer" class="w-80 bg-white shadow-xl p-6 fixed inset-y-0 left-0 transform -translate-x-full transition-transform duration-300 ease-in-out z-40 overflow-y-auto flex flex-col">
             <div>
                 <div class="flex justify-between items-center mb-6">
@@ -140,7 +141,9 @@
             </div>
         </aside>
 
+        <!-- Main Content Area -->
         <div id="contentWrapper" class="flex-1 transition-all duration-300 ease-in-out">
+            <!-- Header -->
             <header class="sticky top-0 bg-gray-100/80 backdrop-blur-lg shadow-sm p-4 md:p-6 z-30 flex items-center justify-between">
                 <button id="openDrawerButton" aria-label="Open patient panel" class="text-slate-700 hover:text-indigo-600 p-2 -ml-2 rounded-md hover:bg-slate-200">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
@@ -158,11 +161,15 @@
                 </div>
             </header>
 
+            <!-- Page Content -->
             <main class="p-4 md:p-6">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     
+                    <!-- Middle Column for Dynamic Views -->
                     <div id="middleColumn" class="lg:col-span-7 xl:col-span-8">
+                        <!-- Dashboard View -->
                         <div id="dashboardView" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Care Plan Summary Card -->
                             <div class="dashboard-card md:col-span-2 flex flex-col">
                                 <h2 class="text-xl font-semibold text-slate-700 mb-4">Care Plan Summary</h2>
                                 <div class="space-y-3 mb-3">
@@ -190,6 +197,7 @@
                                 </div>
                             </div>
 
+                            <!-- Conditions and Orders Cards -->
                             <div class="dashboard-card md:col-span-2">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                     <div>
@@ -240,6 +248,7 @@
                                 </div>
                             </div>
                             
+                            <!-- Current Observations Card -->
                             <div class="dashboard-card md:col-span-1 flex flex-col">
                                 <h2 class="text-xl font-semibold text-slate-700 mb-4">Current Observations</h2>
                                 <p class="text-xs text-slate-400 mb-3">Last Labs: 18 May 2025</p>
@@ -275,6 +284,7 @@
                                 </div>
                             </div>
 
+                            <!-- Goal Expectations Card -->
                             <div class="dashboard-card md:col-span-1 flex flex-col">
                                 <div class="flex justify-between items-center mb-4">
                                     <h2 class="text-xl font-semibold text-slate-700">Goal Expectations</h2>
@@ -319,6 +329,7 @@
                                 </div>
                             </div>
                             
+                            <!-- Barriers to Care Card -->
                             <div class="dashboard-card md:col-span-2 flex flex-col"> 
                                 <h2 class="text-xl font-semibold text-slate-700 mb-4">Barriers to Care</h2>
                                 <ul class="space-y-3">
@@ -336,6 +347,8 @@
                                     </li>
                                 </ul>
                             </div>
+
+                            <!-- Notes & Activity Log Card -->
                              <div class="dashboard-card md:col-span-2"> 
                                 <h2 class="text-xl font-semibold text-slate-700 mb-4">Notes & Activity Log</h2>
                                 <textarea id="careNotes" name="careNotes" rows="4" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow text-sm mb-3" placeholder="Enter new clinical note..."></textarea>
@@ -360,6 +373,7 @@
                             </div>
                         </div>
 
+                        <!-- Order Creation View -->
                         <div id="orderCreationView" class="view-hidden"> 
                             <div class="dashboard-card">
                                 <div class="flex justify-between items-center mb-6">
@@ -409,6 +423,7 @@
                             </div>
                         </div>
 
+                        <!-- Condition Creation View -->
                         <div id="conditionCreationView" class="view-hidden"> 
                             <div class="dashboard-card">
                                 <div class="flex justify-between items-center mb-6">
@@ -474,6 +489,7 @@
                             </div>
                         </div>
                         
+                        <!-- Goal Creation View -->
                         <div id="goalCreationView" class="view-hidden"> 
                             <div class="dashboard-card">
                                 <div class="flex justify-between items-center mb-6">
@@ -532,7 +548,8 @@
                                         <div class="mt-4 pt-4 border-t">
                                             <h3 class="text-md font-semibold text-slate-700 mb-2">Sub-Goals</h3>
                                             <div id="subGoalsDisplayContainer" class="space-y-2 mb-2">
-                                                </div>
+                                                <!-- Dynamically added sub-goals will appear here -->
+                                            </div>
                                             <button type="button" id="navigateToSubGoalFormButton" class="mt-2 px-3 py-1.5 text-xs font-medium text-indigo-700 bg-indigo-100 rounded-md hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
                                                     <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
@@ -558,6 +575,7 @@
                             </div>
                         </div>
                         
+                        <!-- Goal Detail View -->
                         <div id="goalDetailView" class="view-hidden"> 
                             <div class="dashboard-card">
                                 <div class="flex justify-between items-center mb-6">
@@ -612,23 +630,116 @@
                                             </button>
                                         </div>
                                         <div id="viewGoalBreakdownContainer" class="space-y-3">
-                                            </div>
+                                            <!-- Dynamically populated sub-goals and tasks -->
+                                        </div>
                                     </div>
 
                                      <div class="mt-6 text-right">
-                                        <button type="button" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors shadow-md hover:shadow-lg">
-                                            Update Goal
+                                        <button type="button" id="editGoalButton" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors shadow-md hover:shadow-lg">
+                                            Edit Goal
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Goal Edit View -->
+                        <div id="goalEditView" class="view-hidden">
+                            <div class="dashboard-card">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h2 class="text-2xl font-semibold text-slate-800">Edit Goal</h2>
+                                    <button id="backToGoalDetailFromEdit" class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-200 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-colors">
+                                        Cancel
+                                    </button>
+                                </div>
+                                <form id="editGoalForm">
+                                    <input type="hidden" id="editGoalId" name="editGoalId">
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label for="editGoalDescription" class="block text-sm font-medium text-slate-700 mb-1">Description</label>
+                                            <input type="text" id="editGoalDescription" name="editGoalDescription" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                        </div>
+                                        <div>
+                                            <label for="editGoalLifecycleStatus" class="block text-sm font-medium text-slate-700 mb-1">Lifecycle Status</label>
+                                            <select id="editGoalLifecycleStatus" name="editGoalLifecycleStatus" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                                <option value="planned">Planned</option>
+                                                <option value="accepted">Accepted</option>
+                                                <option value="active">Active</option>
+                                                <option value="on-hold">On Hold</option>
+                                                <option value="completed">Completed</option>
+                                                <option value="cancelled">Cancelled</option>
+                                                <option value="entered-in-error">Entered in Error</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="editGoalCategory" class="block text-sm font-medium text-slate-700 mb-1">Category</label>
+                                            <select id="editGoalCategory" name="editGoalCategory" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                                <option>Dietary</option>
+                                                <option>Behavioral</option>
+                                                <option>Treatment</option>
+                                                <option>Physiotherapy</option>
+                                                <option>Nursing</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="editGoalStartDate" class="block text-sm font-medium text-slate-700 mb-1">Start Date</label>
+                                            <input type="date" id="editGoalStartDate" name="editGoalStartDate" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                        </div>
+                                        <fieldset class="border p-4 rounded-md">
+                                            <legend class="text-sm font-medium text-slate-700 px-1">Target Outcome</legend>
+                                            <div class="space-y-3 mt-2">
+                                                <div>
+                                                    <label for="editGoalTargetMeasure" class="block text-xs font-medium text-slate-600 mb-1">Measure</label>
+                                                    <input type="text" id="editGoalTargetMeasure" name="editGoalTargetMeasure" class="w-full p-2 border border-slate-300 rounded-md text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                                                </div>
+                                                <div>
+                                                    <label for="editGoalTargetDetailValue" class="block text-xs font-medium text-slate-600 mb-1">Target Value</label>
+                                                    <input type="text" id="editGoalTargetDetailValue" name="editGoalTargetDetailValue" class="w-full p-2 border border-slate-300 rounded-md text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                                                </div>
+                                                <div>
+                                                    <label for="editGoalTargetDueDate" class="block text-xs font-medium text-slate-600 mb-1">Due Date (Optional)</label>
+                                                    <input type="date" id="editGoalTargetDueDate" name="editGoalTargetDueDate" class="w-full p-2 border border-slate-300 rounded-md text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        
+                                        <div class="mt-4 pt-4 border-t">
+                                            <h3 class="text-md font-semibold text-slate-700 mb-2">Sub-Goals</h3>
+                                            <div id="editSubGoalsDisplayContainer" class="space-y-2 mb-2">
+                                                <!-- Dynamically added/edited sub-goals will appear here -->
+                                            </div>
+                                            <button type="button" id="navigateToSubGoalFormButtonFromEdit" class="mt-2 px-3 py-1.5 text-xs font-medium text-indigo-700 bg-indigo-100 rounded-md hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                                    <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                                                </svg>
+                                                Add Sub-Goal
+                                            </button>
+                                        </div>
+
+                                        <div>
+                                            <label for="editGoalNotes" class="block text-sm font-medium text-slate-700 mb-1">Notes (Optional)</label>
+                                            <textarea id="editGoalNotes" name="editGoalNotes" rows="2" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="mt-6 text-right">
+                                        <button type="button" id="cancelGoalEditButton" class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 rounded-md hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-400 transition-colors mr-2">
+                                            Cancel
+                                        </button>
+                                        <button type="submit" class="px-6 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 transition-colors shadow-md hover:shadow-lg">
+                                            Save Changes
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <!-- Add Sub-Goal View -->
                         <div id="addSubGoalView" class="view-hidden"> 
                             <div class="dashboard-card">
                                 <div class="flex justify-between items-center mb-6">
                                     <h2 class="text-2xl font-semibold text-slate-800">Add Sub-Goal</h2>
-                                    <button id="backToGoalCreationFromSubGoal" class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-200 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-colors">
+                                    <button id="backToParentFromSubGoal" class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-200 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-colors">
                                         Back
                                     </button>
                                 </div>
@@ -645,7 +756,8 @@
                                         <div class="mt-4 pt-4 border-t">
                                             <h3 class="text-md font-semibold text-slate-700 mb-2">Tasks for this Sub-Goal</h3>
                                             <div id="tasksForSubGoalContainer" class="space-y-2 mb-2">
-                                                 </div>
+                                                 <!-- Dynamically added tasks will appear here -->
+                                            </div>
                                             <button type="button" id="navigateToTaskFormButton" class="mt-2 px-3 py-1.5 text-xs font-medium text-indigo-700 bg-indigo-100 rounded-md hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center">
                                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
                                                     <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
@@ -660,7 +772,8 @@
                                                 <button type="button" id="taskSearchButtonSubGoal" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">Search</button>
                                             </div>
                                             <div id="taskSearchResultsContainerSubGoal" class="max-h-40 overflow-y-auto space-y-1">
-                                                </div>
+                                                <!-- Task search results -->
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="mt-6 text-right">
@@ -675,11 +788,12 @@
                             </div>
                         </div>
 
+                        <!-- Add/Link Task View -->
                         <div id="addTaskView" class="view-hidden"> 
                             <div class="dashboard-card">
                                 <div class="flex justify-between items-center mb-4">
                                     <h2 class="text-2xl font-semibold text-slate-800">Task Management</h2>
-                                    <button id="backToSubGoalFromTask" class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-200 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-colors">
+                                    <button id="backToParentFromTask" class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-200 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-colors">
                                         Back
                                     </button>
                                 </div>
@@ -755,15 +869,21 @@
                                         <button type="button" id="taskManagementSearchButton" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">Search</button>
                                     </div>
                                     <div id="taskManagementSearchResults" class="max-h-60 overflow-y-auto space-y-1">
-                                        </div>
+                                        <!-- Task search results for linking -->
+                                    </div>
                                      <div id="taskManagementCreateNewButtonContainer" class="mt-3">
-                                        </div>
+                                        <!-- Button to switch to create new task if not found -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
 
-                    </div> <div id="rightSidebarColumn" class="lg:col-span-5 xl:col-span-4 flex flex-col space-y-6">
+                    </div> 
+                    
+                    <!-- Right Sidebar Column -->
+                    <div id="rightSidebarColumn" class="lg:col-span-5 xl:col-span-4 flex flex-col space-y-6">
+                        <!-- Need Attention Card -->
                         <div class="dashboard-card bg-rose-50 border border-rose-200 flex flex-col">
                             <div class="flex justify-between items-center mb-4">
                                 <h2 class="text-xl font-semibold text-rose-700">Need Attention (3)</h2>
@@ -811,6 +931,7 @@
                                 </li>
                             </ul>
                         </div>
+                        <!-- Care Plan Suggestions Card -->
                          <div class="dashboard-card bg-sky-50 border border-sky-200 flex flex-col">
                             <h2 class="text-xl font-semibold text-sky-700 mb-4">Care Plan Suggestions</h2>
                             <div class="space-y-3">
@@ -834,8 +955,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div> </div> </main>
-        </div> </div> <div id="drawerOverlay" class="fixed inset-0 bg-black bg-opacity-30 z-30 hidden"></div>
+                    </div> 
+                </div> 
+            </main>
+        </div> 
+    </div> 
+    
+    <!-- Drawer Overlay for mobile -->
+    <div id="drawerOverlay" class="fixed inset-0 bg-black bg-opacity-30 z-30 hidden"></div>
 
     <script>
         // DOM Element References
@@ -845,26 +972,31 @@
         const contentWrapper = document.getElementById('contentWrapper'); 
         const drawerOverlay = document.getElementById('drawerOverlay');
 
+        // Main View Containers
         const middleColumn = document.getElementById('middleColumn');
         const dashboardView = document.getElementById('dashboardView');
         const orderCreationView = document.getElementById('orderCreationView');
         const conditionCreationView = document.getElementById('conditionCreationView');
         const goalCreationView = document.getElementById('goalCreationView');
         const goalDetailView = document.getElementById('goalDetailView');
+        const goalEditView = document.getElementById('goalEditView'); // New Edit View
         const addSubGoalView = document.getElementById('addSubGoalView');
         const addTaskView = document.getElementById('addTaskView');
         
-        // Button References for Adding Items
+        // Button References for Adding/Navigating
         const addOrderBtn = document.getElementById('addOrderButton');
         const addConditionBtn = document.getElementById('addConditionButton');
         const addGoalBtn = document.getElementById('addGoalButton');
-        const navigateToSubGoalFormButton = document.getElementById('navigateToSubGoalFormButton');
-        const navigateToTaskFormButton = document.getElementById('navigateToTaskFormButton'); 
-        const addSubGoalToDetailViewButton = document.getElementById('addSubGoalToDetailViewButton');
+        const editGoalButtonOnDetailView = document.getElementById('editGoalButton'); // Button on Goal Detail to go to Edit View
+        const navigateToSubGoalFormButton = document.getElementById('navigateToSubGoalFormButton'); // In Goal Creation
+        const navigateToSubGoalFormButtonFromEdit = document.getElementById('navigateToSubGoalFormButtonFromEdit'); // In Goal Edit
+        const navigateToTaskFormButton = document.getElementById('navigateToTaskFormButton'); // In Sub-Goal Creation
+        const addSubGoalToDetailViewButton = document.getElementById('addSubGoalToDetailViewButton'); // In Goal Detail
         
-        // References for Sub-Goal and Task creation/linking within forms
-        const subGoalsDisplayContainer = document.getElementById('subGoalsDisplayContainer'); 
-        const tasksForSubGoalContainer = document.getElementById('tasksForSubGoalContainer'); 
+        // References for Sub-Goal and Task elements within forms
+        const subGoalsDisplayContainer = document.getElementById('subGoalsDisplayContainer'); // In Goal Creation
+        const editSubGoalsDisplayContainer = document.getElementById('editSubGoalsDisplayContainer'); // In Goal Edit
+        const tasksForSubGoalContainer = document.getElementById('tasksForSubGoalContainer'); // In Sub-Goal Creation
         const taskSearchInputSubGoal = document.getElementById('taskSearchInputSubGoal'); 
         const taskSearchButtonSubGoal = document.getElementById('taskSearchButtonSubGoal'); 
         const taskSearchResultsContainerSubGoal = document.getElementById('taskSearchResultsContainerSubGoal'); 
@@ -883,21 +1015,23 @@
         const cancelOrderBtn = document.getElementById('cancelOrderButton');
         const backToDashboardFromConditionBtn = document.getElementById('backToDashboardFromCondition');
         const cancelConditionBtn = document.getElementById('cancelConditionButton');
-        const backToDashboardFromGoalBtn = document.getElementById('backToDashboardFromGoal');
-        const cancelGoalBtn = document.getElementById('cancelGoalButton');
+        const backToDashboardFromGoalBtn = document.getElementById('backToDashboardFromGoal'); // From Goal Creation
+        const cancelGoalBtn = document.getElementById('cancelGoalButton'); // From Goal Creation
         const backToDashboardFromGoalDetailBtn = document.getElementById('backToDashboardFromGoalDetail');
-        const backToGoalCreationFromSubGoalBtn = document.getElementById('backToGoalCreationFromSubGoal');
-        const cancelSubGoalBtn = document.getElementById('cancelSubGoalButton');
-        const backToSubGoalFromTaskBtn = document.getElementById('backToSubGoalFromTask'); 
-        const cancelTaskBtn = document.getElementById('cancelTaskButton');
+        const backToGoalDetailFromEditBtn = document.getElementById('backToGoalDetailFromEdit'); // From Goal Edit (Cancel)
+        const cancelGoalEditBtn = document.getElementById('cancelGoalEditButton'); // From Goal Edit (Alternative Cancel)
+        const backToParentFromSubGoalBtn = document.getElementById('backToParentFromSubGoal'); // From Sub-Goal Creation
+        const cancelSubGoalBtn = document.getElementById('cancelSubGoalButton'); // From Sub-Goal Creation
+        const backToParentFromTaskBtn = document.getElementById('backToParentFromTask'); // From Task Creation
+        const cancelTaskBtn = document.getElementById('cancelTaskButton'); // From Task Creation
 
-        // Temporary data stores for form building
-        let tempSubGoals = []; 
-        let tempTasksForSubGoal = []; 
-        let currentViewingGoalId = null; 
-        let currentParentGoalForSubGoal = null; 
-        let currentParentSubGoalForTask = null; 
-        // let taskManagementReturnHash = '#dashboard'; // Not currently used, navigation is handled by dataset attributes
+        // Temporary data stores
+        let tempSubGoals = []; // For new goal creation or editing existing goal's subgoals
+        let tempTasksForSubGoal = []; // For new sub-goal creation or editing existing sub-goal's tasks
+        let currentViewingGoalId = null; // ID of the goal being viewed or edited
+        let currentEditingGoalId = null; // Specifically for the edit view context
+        // let currentParentGoalForSubGoal = null; // Not strictly needed as goalId is passed in hash
+        // let currentParentSubGoalForTask = null; // Not strictly needed as subGoalId is passed in hash
 
         // Mock Data (Simulates backend data)
         const existingTasksData = [
@@ -907,7 +1041,7 @@
             { id: "task_existing_4", description: "Perform annual foot exam", status: "planned", priority: "routine", owner: "Podiatrist"},
         ];
 
-        const goalsData = {
+        let goalsData = { // Changed to let for modification
             cholesterol: {
                 id: "cholesterol",
                 description: "Reduce Cholesterol",
@@ -978,6 +1112,65 @@
             }
         };
 
+        // Function to render sub-goals in either Goal Creation or Goal Edit view
+        function renderSubGoalsInForm(subGoalsArray, containerElement, isEditMode = false, parentGoalId = null) {
+            containerElement.innerHTML = '';
+            subGoalsArray.forEach((subGoal, index) => {
+                const subGoalDiv = document.createElement('div');
+                subGoalDiv.className = 'p-3 border rounded-md bg-slate-100 text-sm mb-2';
+                
+                let tasksHtml = '<ul class="list-disc list-inside ml-4 mt-1 text-xs">';
+                if (subGoal.tasks && subGoal.tasks.length > 0) {
+                    subGoal.tasks.forEach(task => {
+                        tasksHtml += `<li>${task.description} ${task.isExisting ? '(Linked)' : '(New)'}</li>`;
+                    });
+                } else {
+                    tasksHtml += '<li>No tasks defined.</li>';
+                }
+                tasksHtml += '</ul>';
+
+                subGoalDiv.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span class="font-medium">${subGoal.description}</span>
+                        <div>
+                            ${isEditMode ? `<button type="button" class="editTempSubGoalButton text-blue-600 hover:text-blue-800 text-xs mr-2" data-index="${index}" data-parent-goal-id="${parentGoalId}">Edit</button>` : ''}
+                            <button type="button" class="removeTempSubGoalButton text-red-500 hover:text-red-700 text-xs" data-index="${index}">Remove</button>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600">Target: ${subGoal.target || 'N/A'}</p>
+                    ${tasksHtml}
+                `;
+                containerElement.appendChild(subGoalDiv);
+            });
+
+            // Add event listeners for remove buttons (and edit if in edit mode)
+            containerElement.querySelectorAll('.removeTempSubGoalButton').forEach(button => {
+                button.addEventListener('click', function() {
+                    const indexToRemove = parseInt(this.dataset.index);
+                    tempSubGoals.splice(indexToRemove, 1);
+                    renderSubGoalsInForm(tempSubGoals, containerElement, isEditMode, parentGoalId); // Re-render
+                });
+            });
+
+            if (isEditMode) {
+                containerElement.querySelectorAll('.editTempSubGoalButton').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const indexToEdit = parseInt(this.dataset.index);
+                        const subGoalToEdit = tempSubGoals[indexToEdit];
+                        // Navigate to addSubGoalView, but pre-fill it and change its mode to "edit"
+                        // This part needs careful implementation if deep editing of sub-goals is required here.
+                        // For now, let's assume "edit" means removing and re-adding.
+                        // A more robust solution would involve a dedicated sub-goal edit view or modal.
+                        console.log("Edit sub-goal at index:", indexToEdit, subGoalToEdit);
+                        alert("Editing sub-goals directly in this list is not fully implemented. Please remove and re-add if changes are needed for sub-goal structure or its tasks.");
+                        // Example navigation for a future enhancement:
+                        // window.location.hash = `#edit-sub-goal?parentGoalId=${parentGoalId}&subGoalIndex=${indexToEdit}&from=goalEdit`;
+                    });
+                });
+            }
+        }
+
+
         // Function to populate the Goal Detail View
         function populateGoalDetailView(goalId) {
             currentViewingGoalId = goalId; 
@@ -1040,35 +1233,67 @@
                 }
             }
         }
+
+        // Function to populate the Goal Edit View
+        function populateGoalEditView(goalId) {
+            currentEditingGoalId = goalId; // Set the ID of the goal being edited
+            const goal = goalsData[goalId];
+            if (goal) {
+                document.getElementById('editGoalId').value = goal.id;
+                document.getElementById('editGoalDescription').value = goal.description;
+                document.getElementById('editGoalLifecycleStatus').value = goal.lifecycleStatus;
+                document.getElementById('editGoalCategory').value = goal.category;
+                document.getElementById('editGoalStartDate').value = goal.startDate;
+                document.getElementById('editGoalTargetMeasure').value = goal.targetMeasure;
+                document.getElementById('editGoalTargetDetailValue').value = goal.targetDetailValue;
+                document.getElementById('editGoalTargetDueDate').value = goal.targetDueDate || '';
+                document.getElementById('editGoalNotes').value = goal.notes || '';
+
+                // Deep copy subGoals to tempSubGoals for editing
+                tempSubGoals = goal.subGoals ? JSON.parse(JSON.stringify(goal.subGoals)) : [];
+                renderSubGoalsInForm(tempSubGoals, editSubGoalsDisplayContainer, true, goalId);
+            }
+        }
         
         // Event Listeners for Navigation to Sub-Goal/Task Forms
         if (navigateToSubGoalFormButton) { 
             navigateToSubGoalFormButton.addEventListener('click', () => {
-                currentParentGoalForSubGoal = 'temp_main_goal'; // Indicates a new main goal is being created
+                // currentParentGoalForSubGoal = 'temp_main_goal'; // Indicates a new main goal is being created
                 window.location.hash = '#add-sub-goal?from=goalCreation'; 
+            });
+        }
+        if (navigateToSubGoalFormButtonFromEdit) {
+            navigateToSubGoalFormButtonFromEdit.addEventListener('click', () => {
+                window.location.hash = `#add-sub-goal?from=goalEdit&parentGoalId=${currentEditingGoalId}`;
             });
         }
          if (addSubGoalToDetailViewButton) { 
             addSubGoalToDetailViewButton.addEventListener('click', () => {
-                // currentViewingGoalId is set when goal detail view is populated
                 window.location.hash = `#add-sub-goal?parentGoalId=${currentViewingGoalId}&from=goalDetail`;
             });
         }
 
         if (navigateToTaskFormButton) { 
              navigateToTaskFormButton.addEventListener('click', () => {
-                currentParentSubGoalForTask = 'temp_sub_goal'; // Indicates a new sub-goal is being created
-                window.location.hash = '#add-task?from=subGoalCreation'; 
+                // Determine parent IDs from the current hash for context
+                const params = new URLSearchParams(window.location.hash.split('?')[1]);
+                const parentGoalId = params.get('parentGoalId');
+                const fromView = params.get('from');
+                // currentParentSubGoalForTask = 'temp_sub_goal'; // Indicates a new sub-goal is being created
+                let taskNavHash = '#add-task?from=subGoalCreation';
+                if (parentGoalId) taskNavHash += `&parentGoalId=${parentGoalId}`;
+                if (fromView) taskNavHash += `&returnFrom=${fromView}`; // To know where sub-goal creation was initiated
+                window.location.hash = taskNavHash;
             });
         }
         
         // Event Listener for "Add Tasks" button within Goal Detail's Sub-Goal list
         document.getElementById('viewGoalBreakdownContainer')?.addEventListener('click', function(event) {
-            const target = event.target.closest('button'); 
-            if (target && target.classList.contains('manageSubGoalTasksButton')) {
+            const target = event.target.closest('button.manageSubGoalTasksButton'); 
+            if (target) {
                 const subGoalId = target.dataset.subgoalId;
                 const parentGoalId = target.dataset.parentGoalId;
-                currentParentSubGoalForTask = subGoalId; 
+                // currentParentSubGoalForTask = subGoalId; 
                 window.location.hash = `#add-task?parentSubGoalId=${subGoalId}&parentGoalId=${parentGoalId}&from=goalDetail`;
             }
         });
@@ -1099,7 +1324,6 @@
         // Function to link an existing task to the temporary sub-goal being created
         function linkExistingTaskToTempSubGoal(taskData) { 
             if (tempTasksForSubGoal.find(t => t.id === taskData.id)) {
-                // Using a simple browser alert for now, replace with modal if needed
                 console.warn("This task is already linked to the sub-goal.");
                 const existingItem = tasksForSubGoalContainer.querySelector(`[data-task-id="${taskData.id}"]`);
                 if (existingItem) {
@@ -1110,24 +1334,44 @@
             }
             tempTasksForSubGoal.push({...taskData, isExisting: true }); 
             
-            const taskDisplayItem = document.createElement('div');
-            taskDisplayItem.className = 'p-1.5 border rounded-md bg-green-50 text-xs ml-4 flex justify-between items-center';
-            taskDisplayItem.dataset.taskId = taskData.id; // For potential unlinking
-            taskDisplayItem.innerHTML = `
-                <span>Task: ${taskData.description} (Linked)</span>
-                <button type="button" class="unlinkTaskButton text-red-500 hover:text-red-700 text-xs" data-task-id="${taskData.id}">Unlink</button>
-            `;
-            tasksForSubGoalContainer.appendChild(taskDisplayItem);
+            renderTasksInSubGoalForm(); // Re-render tasks in the sub-goal form
             taskSearchResultsContainerSubGoal.innerHTML = ''; 
             taskSearchInputSubGoal.value = '';
         }
+        
+        // Function to render tasks in the Add Sub-Goal form
+        function renderTasksInSubGoalForm() {
+            tasksForSubGoalContainer.innerHTML = '';
+            tempTasksForSubGoal.forEach((task, index) => {
+                const taskDisplayItem = document.createElement('div');
+                taskDisplayItem.className = 'p-1.5 border rounded-md bg-blue-50 text-xs ml-4 flex justify-between items-center';
+                taskDisplayItem.dataset.taskId = task.id;
+                taskDisplayItem.innerHTML = `
+                    <span>${task.isExisting ? 'Linked Task: ' : 'New Task: '} ${task.description}</span>
+                    <button type="button" class="unlinkOrRemoveTaskButton text-red-500 hover:text-red-700 text-xs" data-index="${index}">
+                        ${task.isExisting ? 'Unlink' : 'Remove'}
+                    </button>
+                `;
+                tasksForSubGoalContainer.appendChild(taskDisplayItem);
+            });
 
-        // Event Listener for Unlinking Tasks in Add Sub-Goal View
+            // Add event listeners for unlink/remove buttons
+            tasksForSubGoalContainer.querySelectorAll('.unlinkOrRemoveTaskButton').forEach(button => {
+                button.addEventListener('click', function() {
+                    const indexToRemove = parseInt(this.dataset.index);
+                    tempTasksForSubGoal.splice(indexToRemove, 1);
+                    renderTasksInSubGoalForm(); // Re-render
+                });
+            });
+        }
+
+
+        // Event Listener for Unlinking/Removing Tasks in Add Sub-Goal View (delegated)
         tasksForSubGoalContainer.addEventListener('click', function(event) {
-            if (event.target && event.target.classList.contains('unlinkTaskButton')) {
-                const taskIdToUnlink = event.target.dataset.taskId;
-                tempTasksForSubGoal = tempTasksForSubGoal.filter(task => task.id !== taskIdToUnlink);
-                event.target.parentElement.remove(); 
+            if (event.target && event.target.classList.contains('unlinkOrRemoveTaskButton')) { // Changed class name
+                const taskIndexToRemove = parseInt(event.target.dataset.index); // Use index now
+                tempTasksForSubGoal.splice(taskIndexToRemove, 1); // Remove task from temp array by index
+                renderTasksInSubGoalForm(); // Re-render the list
             }
         });
         
@@ -1149,7 +1393,13 @@
                         taskDiv.className = 'p-2 border rounded-md hover:bg-indigo-50 cursor-pointer text-sm flex justify-between items-center';
                         taskDiv.innerHTML = `<span>${task.description} (Owner: ${task.owner})</span>
                                            <button class="linkThisTaskButtonDetailView px-2 py-1 text-xs bg-blue-500 text-white rounded hover:bg-blue-600" data-task-id="${task.id}">Link</button>`;
-                        taskDiv.querySelector('.linkThisTaskButtonDetailView').addEventListener('click', () => linkExistingTaskToSubGoalInDetail(task, currentParentSubGoalForTask, addTaskView.dataset.returnToGoalId || currentViewingGoalId));
+                        
+                        taskDiv.querySelector('.linkThisTaskButtonDetailView').addEventListener('click', () => {
+                            const params = new URLSearchParams(window.location.hash.split('?')[1]);
+                            const parentSubGoalId = params.get('parentSubGoalId');
+                            const parentGoalId = params.get('parentGoalId');
+                            linkExistingTaskToSubGoalInDetail(task, parentSubGoalId, parentGoalId);
+                        });
                         taskManagementSearchResults.appendChild(taskDiv);
                     });
                 } else {
@@ -1158,7 +1408,7 @@
             });
         }
         
-        // Function to link an existing task to a sub-goal when in the Goal Detail context
+        // Function to link an existing task to a sub-goal when in the Goal Detail context (or task management from there)
         function linkExistingTaskToSubGoalInDetail(taskData, subGoalId, parentGoalId) {
             const goal = goalsData[parentGoalId];
             if (goal && goal.subGoals) {
@@ -1167,99 +1417,121 @@
                     if (!subGoal.tasks) subGoal.tasks = [];
                     if (subGoal.tasks.find(t => t.id === taskData.id)) {
                         console.warn("This task is already linked to this sub-goal.");
-                        // Potentially show a message in the UI
+                        alert("This task is already linked to this sub-goal.");
                         return;
                     }
-                    subGoal.tasks.push({...taskData, isExisting: true});
+                    subGoal.tasks.push({...taskData, isExisting: true}); // Mark as existing
+                    console.log(`Task ${taskData.description} linked to sub-goal ${subGoal.description}`);
                     window.location.hash = `#view-goal-${parentGoalId}`; 
                 } else {
                     console.error("Sub-goal not found for linking task:", subGoalId);
+                    alert("Error: Sub-goal not found. Cannot link task.");
                 }
             } else {
                  console.error("Parent goal not found for linking task:", parentGoalId);
+                 alert("Error: Parent goal not found. Cannot link task.");
             }
         }
 
         // Core View Switching Logic
         function showView(viewName, params = {}) {
-            // Hide all main views in the middle column
-            dashboardView.classList.add('view-hidden');
-            orderCreationView.classList.add('view-hidden');
-            conditionCreationView.classList.add('view-hidden');
-            goalCreationView.classList.add('view-hidden');
-            goalDetailView.classList.add('view-hidden');
-            addSubGoalView.classList.add('view-hidden');
-            addTaskView.classList.add('view-hidden');
+            // Hide all main views
+            [dashboardView, orderCreationView, conditionCreationView, goalCreationView, goalDetailView, goalEditView, addSubGoalView, addTaskView].forEach(view => {
+                if (view) view.classList.add('view-hidden');
+            });
             
-            // Show the requested view and perform necessary setup
-            if (viewName === 'orderCreation') {
-                orderCreationView.classList.remove('view-hidden');
-                document.getElementById('createOrderForm').reset();
-            } else if (viewName === 'conditionCreation') {
-                conditionCreationView.classList.remove('view-hidden');
-                document.getElementById('createConditionForm').reset();
-            } else if (viewName === 'goalCreation') {
-                goalCreationView.classList.remove('view-hidden');
-                document.getElementById('createGoalForm').reset();
-                if(subGoalsDisplayContainer) subGoalsDisplayContainer.innerHTML = ''; // Clear previous temp sub-goals
-                tempSubGoals = [];
-            } else if (viewName === 'goalDetail') {
-                populateGoalDetailView(params.goalId);
-                goalDetailView.classList.remove('view-hidden');
-            } else if (viewName === 'addSubGoal') {
-                document.getElementById('createSubGoalForm').reset();
-                if(tasksForSubGoalContainer) tasksForSubGoalContainer.innerHTML = ''; 
-                tempTasksForSubGoal = []; 
-                currentParentGoalForSubGoal = params.parentGoalId || 'temp_main_goal'; 
-                if(taskSearchResultsContainerSubGoal) taskSearchResultsContainerSubGoal.innerHTML = ''; 
-                if(taskSearchInputSubGoal) taskSearchInputSubGoal.value = '';
-                // Store where to return after saving/canceling this sub-goal
-                addSubGoalView.dataset.returnTo = params.from === 'goalDetail' ? `#view-goal-${params.parentGoalId}` : '#add-goal';
-                addSubGoalView.classList.remove('view-hidden');
-            } else if (viewName === 'addTask') {
-                document.getElementById('createTaskForm').reset();
-                if(params.description) { 
-                    document.getElementById('taskDescription').value = params.description;
-                }
-                currentParentSubGoalForTask = params.parentSubGoalId || 'temp_sub_goal'; 
-                
-                // Determine where to navigate back to after task creation/cancellation
-                if (params.from === 'goalDetail') {
-                    addTaskView.dataset.returnTo = `#view-goal-${params.parentGoalId}`;
-                    addTaskView.dataset.returnToGoalId = params.parentGoalId; // Store for linking existing task
-                    addTaskView.dataset.returnToSubGoalId = params.parentSubGoalId;
-                } else if (params.from === 'subGoalCreation') {
-                     const parentGoalForSubGoal = new URLSearchParams(window.location.hash.split('?')[1]).get('parentGoalId');
-                     const fromForSubGoal = new URLSearchParams(window.location.hash.split('?')[1]).get('from');
-                     if(fromForSubGoal === 'goalDetail' && parentGoalForSubGoal){
-                         addTaskView.dataset.returnTo = `#add-sub-goal?parentGoalId=${parentGoalForSubGoal}&from=goalDetail`;
-                     } else {
-                         addTaskView.dataset.returnTo = `#add-sub-goal?from=goalCreation`;
-                     }
-                } else { 
-                    addTaskView.dataset.returnTo = '#dashboard'; 
-                }
+            // Show the requested view
+            let targetView;
+            switch(viewName) {
+                case 'orderCreation':
+                    targetView = orderCreationView;
+                    if(targetView) document.getElementById('createOrderForm').reset();
+                    break;
+                case 'conditionCreation':
+                    targetView = conditionCreationView;
+                    if(targetView) document.getElementById('createConditionForm').reset();
+                    break;
+                case 'goalCreation':
+                    targetView = goalCreationView;
+                    if(targetView) {
+                        document.getElementById('createGoalForm').reset();
+                        tempSubGoals = [];
+                        if(subGoalsDisplayContainer) renderSubGoalsInForm(tempSubGoals, subGoalsDisplayContainer, false);
+                    }
+                    break;
+                case 'goalDetail':
+                    targetView = goalDetailView;
+                    if(targetView) populateGoalDetailView(params.goalId);
+                    break;
+                case 'goalEdit':
+                    targetView = goalEditView;
+                    if(targetView) populateGoalEditView(params.goalId);
+                    break;
+                case 'addSubGoal':
+                    targetView = addSubGoalView;
+                    if(targetView) {
+                        document.getElementById('createSubGoalForm').reset();
+                        tempTasksForSubGoal = [];
+                        if(tasksForSubGoalContainer) renderTasksInSubGoalForm(); // Clear and render empty
+                        if(taskSearchResultsContainerSubGoal) taskSearchResultsContainerSubGoal.innerHTML = ''; 
+                        if(taskSearchInputSubGoal) taskSearchInputSubGoal.value = '';
+                        
+                        // Set return path for cancel/save
+                        let returnTo = '#add-goal'; // Default for new goal creation
+                        if (params.from === 'goalDetail') {
+                            returnTo = `#view-goal-${params.parentGoalId}`;
+                        } else if (params.from === 'goalEdit') {
+                            returnTo = `#edit-goal-${params.parentGoalId}`;
+                        }
+                        addSubGoalView.dataset.returnTo = returnTo;
+                        addSubGoalView.dataset.parentGoalId = params.parentGoalId || 'temp_main_goal';
+                        addSubGoalView.dataset.fromContext = params.from; // 'goalCreation', 'goalEdit', 'goalDetail'
+                    }
+                    break;
+                case 'addTask':
+                    targetView = addTaskView;
+                    if(targetView) {
+                        document.getElementById('createTaskForm').reset();
+                        if(params.description) document.getElementById('taskDescription').value = params.description;
+                        
+                        let returnTo = '#dashboard'; // Default
+                        if (params.from === 'goalDetail') { // Coming from "Add Task" on a sub-goal in Goal Detail
+                            returnTo = `#view-goal-${params.parentGoalId}`;
+                        } else if (params.from === 'subGoalCreation') { // Coming from "Add Task" in Sub-Goal Creation form
+                            // Construct the return path to sub-goal form, preserving its original context
+                            returnTo = `#add-sub-goal?from=${params.returnFrom || 'goalCreation'}`;
+                            if(params.parentGoalId) returnTo += `&parentGoalId=${params.parentGoalId}`;
+                        }
+                        addTaskView.dataset.returnTo = returnTo;
+                        addTaskView.dataset.parentGoalId = params.parentGoalId;
+                        addTaskView.dataset.parentSubGoalId = params.parentSubGoalId;
+                        addTaskView.dataset.fromContext = params.from;
 
-                // Default to 'create-task' tab
-                if(createTaskFormSection) createTaskFormSection.classList.remove('view-hidden');
-                if(linkTaskFormSection) linkTaskFormSection.classList.add('view-hidden');
-                if(taskFormTabs) {
-                    taskFormTabs.querySelector('[data-tab="create-task"]')?.classList.add('active');
-                    taskFormTabs.querySelector('[data-tab="link-task"]')?.classList.remove('active');
-                }
-                if(taskManagementSearchResults) taskManagementSearchResults.innerHTML = ''; // Clear previous search results
-                if(taskManagementSearchInput) taskManagementSearchInput.value = '';
 
-                addTaskView.classList.remove('view-hidden');
+                        // Default to 'create-task' tab
+                        if(createTaskFormSection) createTaskFormSection.classList.remove('view-hidden');
+                        if(linkTaskFormSection) linkTaskFormSection.classList.add('view-hidden');
+                        if(taskFormTabs) {
+                            taskFormTabs.querySelector('[data-tab="create-task"]')?.classList.add('active');
+                            taskFormTabs.querySelector('[data-tab="link-task"]')?.classList.remove('active');
+                        }
+                        if(taskManagementSearchResults) taskManagementSearchResults.innerHTML = '';
+                        if(taskManagementSearchInput) taskManagementSearchInput.value = '';
+                    }
+                    break;
+                default:
+                    targetView = dashboardView;
             }
-             else { // Default to dashboardView
-                dashboardView.classList.remove('view-hidden');
+
+            if (targetView) {
+                targetView.classList.remove('view-hidden');
+            } else {
+                if(dashboardView) dashboardView.classList.remove('view-hidden'); // Fallback
             }
             
+            // Scroll to top
             setTimeout(() => {
-                if (contentWrapper) { 
-                    contentWrapper.scrollTop = 0;
-                }
+                if (contentWrapper) contentWrapper.scrollTop = 0;
                 document.documentElement.scrollTop = 0; 
                 document.body.scrollTop = 0; 
                 window.scrollTo(0,0); 
@@ -1275,6 +1547,9 @@
             if (path.startsWith('#view-goal-')) {
                 const goalId = path.substring('#view-goal-'.length);
                 showView('goalDetail', { goalId });
+            } else if (path.startsWith('#edit-goal-')) {
+                const goalId = path.substring('#edit-goal-'.length);
+                showView('goalEdit', { goalId });
             } else if (path === '#create-order') {
                 showView('orderCreation');
             } else if (path === '#add-condition') {
@@ -1282,13 +1557,17 @@
             } else if (path === '#add-goal') {
                 showView('goalCreation');
             } else if (path === '#add-sub-goal') {
-                showView('addSubGoal', { parentGoalId: params.get('parentGoalId'), from: params.get('from') });
+                showView('addSubGoal', { 
+                    parentGoalId: params.get('parentGoalId'), 
+                    from: params.get('from') 
+                });
             } else if (path === '#add-task') { 
                  showView('addTask', { 
                     parentSubGoalId: params.get('parentSubGoalId'), 
                     parentGoalId: params.get('parentGoalId'), 
-                    from: params.get('from'),
-                    description: params.get('description') 
+                    from: params.get('from'), // e.g. 'subGoalCreation', 'goalDetail'
+                    description: params.get('description'),
+                    returnFrom: params.get('returnFrom') // Used when task is from sub-goal, to know sub-goal's original 'from'
                 });
             }
              else {
@@ -1296,60 +1575,71 @@
             }
         }
 
-        // Event Listeners for "Add" buttons on Dashboard
-        if (addOrderBtn) {
-            addOrderBtn.addEventListener('click', function(event) {
-                event.preventDefault();
-                window.location.hash = '#create-order';
+        // Event Listeners for "Add" and "Edit" buttons
+        if (addOrderBtn) addOrderBtn.addEventListener('click', (e) => { e.preventDefault(); window.location.hash = '#create-order'; });
+        if (addConditionBtn) addConditionBtn.addEventListener('click', (e) => { e.preventDefault(); window.location.hash = '#add-condition'; });
+        if (addGoalBtn) addGoalBtn.addEventListener('click', (e) => { e.preventDefault(); window.location.hash = '#add-goal'; });
+        if (editGoalButtonOnDetailView) {
+            editGoalButtonOnDetailView.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentViewingGoalId) {
+                    window.location.hash = `#edit-goal-${currentViewingGoalId}`;
+                }
             });
         }
-        if (addConditionBtn) {
-            addConditionBtn.addEventListener('click', function(event) {
-                event.preventDefault();
-                window.location.hash = '#add-condition';
-            });
-        }
-        if (addGoalBtn) {
-            addGoalBtn.addEventListener('click', function(event) {
-                event.preventDefault();
-                window.location.hash = '#add-goal';
-            });
-        }
+
 
         // Navigation Helper Functions
-        function goBackToDashboard() {
-            window.location.hash = '#dashboard';
-        }
-        function goBackToGoalCreation() {
-            window.location.hash = '#add-goal';
-        }
-        function goBackToSubGoalCreation() { // Used by task creation when coming from sub-goal form
-            const returnPath = addTaskView.dataset.returnTo || '#add-goal'; // Fallback
-            window.location.hash = returnPath;
-        }
-        function goBackFromSubGoalForm() {
-            const returnPath = addSubGoalView.dataset.returnTo || '#add-goal';
-            window.location.hash = returnPath;
-        }
-
+        function goBackToDashboard() { window.location.hash = '#dashboard'; }
+        function goBackToGoalDetail(goalId) { window.location.hash = `#view-goal-${goalId || currentViewingGoalId || currentEditingGoalId}`; }
 
         // Event Listeners for Back/Cancel Buttons
         if (backToDashboardFromOrderBtn) backToDashboardFromOrderBtn.addEventListener('click', goBackToDashboard);
         if (cancelOrderBtn) cancelOrderBtn.addEventListener('click', goBackToDashboard);
         if (backToDashboardFromConditionBtn) backToDashboardFromConditionBtn.addEventListener('click', goBackToDashboard);
         if (cancelConditionBtn) cancelConditionBtn.addEventListener('click', goBackToDashboard);
+        
+        // Goal Creation
         if (backToDashboardFromGoalBtn) backToDashboardFromGoalBtn.addEventListener('click', goBackToDashboard);
         if (cancelGoalBtn) cancelGoalBtn.addEventListener('click', goBackToDashboard);
+        
+        // Goal Detail
         if (backToDashboardFromGoalDetailBtn) backToDashboardFromGoalDetailBtn.addEventListener('click', goBackToDashboard);
-        
-        if(backToGoalCreationFromSubGoalBtn) backToGoalCreationFromSubGoalBtn.addEventListener('click', goBackFromSubGoalForm);
-        if(cancelSubGoalBtn) cancelSubGoalBtn.addEventListener('click', goBackFromSubGoalForm);
 
-        if(backToSubGoalFromTaskBtn) backToSubGoalFromTaskBtn.addEventListener('click', goBackToSubGoalCreation);
-        if(cancelTaskBtn) cancelTaskBtn.addEventListener('click', goBackToSubGoalCreation);
+        // Goal Edit
+        if (backToGoalDetailFromEditBtn) backToGoalDetailFromEditBtn.addEventListener('click', () => goBackToGoalDetail(currentEditingGoalId));
+        if (cancelGoalEditBtn) cancelGoalEditBtn.addEventListener('click', () => goBackToGoalDetail(currentEditingGoalId));
+        
+        // Sub-Goal Creation/Editing
+        if(backToParentFromSubGoalBtn) {
+            backToParentFromSubGoalBtn.addEventListener('click', () => {
+                const returnPath = addSubGoalView.dataset.returnTo || '#add-goal';
+                window.location.hash = returnPath;
+            });
+        }
+        if(cancelSubGoalBtn) {
+            cancelSubGoalBtn.addEventListener('click', () => {
+                const returnPath = addSubGoalView.dataset.returnTo || '#add-goal';
+                window.location.hash = returnPath;
+            });
+        }
+
+        // Task Creation/Linking
+        if(backToParentFromTaskBtn) {
+            backToParentFromTaskBtn.addEventListener('click', () => {
+                const returnPath = addTaskView.dataset.returnTo || '#dashboard';
+                window.location.hash = returnPath;
+            });
+        }
+        if(cancelTaskBtn) {
+            cancelTaskBtn.addEventListener('click', () => {
+                const returnPath = addTaskView.dataset.returnTo || '#dashboard';
+                window.location.hash = returnPath;
+            });
+        }
         
         
-        // Form Submission Handlers (Simplified - data is not persisted beyond session)
+        // Form Submission Handlers
         document.getElementById('createGoalForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
             const goalDesc = document.getElementById('goalDescription').value;
@@ -1364,88 +1654,128 @@
                 targetDetailValue: document.getElementById('goalTargetDetailValue').value,
                 targetDueDate: document.getElementById('goalTargetDueDate').value,
                 notes: document.getElementById('goalNotes').value,
-                subGoals: [...tempSubGoals] 
+                subGoals: [...tempSubGoals] // Use the collected sub-goals
             };
-            console.log("Main Goal Form Submitted. New Goal:", goalsData[newGoalId]);
-            tempSubGoals = []; 
-            goBackToDashboard();
+            console.log("Main Goal Created:", goalsData[newGoalId]);
+            tempSubGoals = []; // Reset for next creation
+            goBackToDashboard(); // Or go to detail view: goBackToGoalDetail(newGoalId);
+        });
+
+        document.getElementById('editGoalForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const goalIdToEdit = document.getElementById('editGoalId').value;
+            if (goalsData[goalIdToEdit]) {
+                goalsData[goalIdToEdit] = {
+                    ...goalsData[goalIdToEdit], // Preserve existing fields like ID
+                    description: document.getElementById('editGoalDescription').value,
+                    lifecycleStatus: document.getElementById('editGoalLifecycleStatus').value,
+                    category: document.getElementById('editGoalCategory').value,
+                    startDate: document.getElementById('editGoalStartDate').value,
+                    targetMeasure: document.getElementById('editGoalTargetMeasure').value,
+                    targetDetailValue: document.getElementById('editGoalTargetDetailValue').value,
+                    targetDueDate: document.getElementById('editGoalTargetDueDate').value,
+                    notes: document.getElementById('editGoalNotes').value,
+                    subGoals: [...tempSubGoals] // Use the potentially modified sub-goals
+                };
+                console.log("Goal Updated:", goalsData[goalIdToEdit]);
+                tempSubGoals = []; // Reset
+                currentEditingGoalId = null;
+                goBackToGoalDetail(goalIdToEdit);
+            } else {
+                console.error("Goal ID not found for editing:", goalIdToEdit);
+                alert("Error: Could not save changes. Goal not found.");
+            }
         });
 
         document.getElementById('createSubGoalForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
             const subGoalDesc = document.getElementById('subGoalDescription').value;
             const subGoalTarget = document.getElementById('subGoalTarget').value;
-            const newSubGoal = {id: `sg-${Date.now()}`, description: subGoalDesc, target: subGoalTarget, tasks: [...tempTasksForSubGoal], status: 'Planned'};
+            const newSubGoal = {
+                id: `sg-${Date.now()}`, 
+                description: subGoalDesc, 
+                target: subGoalTarget, 
+                tasks: [...tempTasksForSubGoal], // Use collected tasks
+                status: 'Planned' // Default status
+            };
             
-            const parentGoalIdFromHash = new URLSearchParams(window.location.hash.split('?')[1]).get('parentGoalId');
-            const fromView = new URLSearchParams(window.location.hash.split('?')[1]).get('from');
+            const parentGoalId = addSubGoalView.dataset.parentGoalId;
+            const fromContext = addSubGoalView.dataset.fromContext; // 'goalCreation', 'goalEdit', 'goalDetail'
 
-            if (fromView === 'goalDetail' && parentGoalIdFromHash && goalsData[parentGoalIdFromHash]) {
-                if (!goalsData[parentGoalIdFromHash].subGoals) goalsData[parentGoalIdFromHash].subGoals = [];
-                goalsData[parentGoalIdFromHash].subGoals.push(newSubGoal);
-                window.location.hash = `#view-goal-${parentGoalIdFromHash}`; 
-            } else { 
+            if (fromContext === 'goalCreation') { // Adding to a new main goal being created
                 tempSubGoals.push(newSubGoal);
-                const subGoalDisplayItem = document.createElement('div');
-                subGoalDisplayItem.className = 'p-2 border rounded-md bg-slate-100 text-sm';
-                subGoalDisplayItem.textContent = `Sub-Goal: ${subGoalDesc} (Target: ${subGoalTarget || 'N/A'}) - ${tempTasksForSubGoal.length} task(s)`;
-                if(subGoalsDisplayContainer) subGoalsDisplayContainer.appendChild(subGoalDisplayItem);
-                goBackFromSubGoalForm(); 
+                renderSubGoalsInForm(tempSubGoals, subGoalsDisplayContainer, false);
+            } else if (fromContext === 'goalEdit' && parentGoalId) { // Adding to an existing main goal being edited
+                tempSubGoals.push(newSubGoal); // Add to the temporary list for the edit view
+                renderSubGoalsInForm(tempSubGoals, editSubGoalsDisplayContainer, true, parentGoalId);
+            } else if (fromContext === 'goalDetail' && parentGoalId && goalsData[parentGoalId]) { // Adding directly to a persisted goal
+                if (!goalsData[parentGoalId].subGoals) goalsData[parentGoalId].subGoals = [];
+                goalsData[parentGoalId].subGoals.push(newSubGoal);
+            } else {
+                console.error("Cannot determine where to save sub-goal. ParentGoalId:", parentGoalId, "FromContext:", fromContext);
+                alert("Error: Could not save sub-goal. Context unclear.");
+                return; // Prevent further execution if context is bad
             }
-            tempTasksForSubGoal = []; 
-            console.log("Sub-Goal Form Submitted:", newSubGoal);
+            
+            tempTasksForSubGoal = []; // Reset for next sub-goal or task
+            console.log("Sub-Goal Saved:", newSubGoal, "to parent context:", fromContext, "parentGoalId:", parentGoalId);
+            window.location.hash = addSubGoalView.dataset.returnTo || '#dashboard'; // Navigate back
         });
 
          document.getElementById('createTaskForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
             const taskDesc = document.getElementById('taskDescription').value;
-            const taskStatus = document.getElementById('taskStatus').value;
-            const taskPriority = document.getElementById('taskPriority').value;
-            const taskOwner = document.getElementById('taskOwner').value;
-            const taskStartDate = document.getElementById('taskStartDate').value;
-            const taskEndDate = document.getElementById('taskEndDate').value;
-            const taskNotes = document.getElementById('taskNotes').value;
-
             const newTask = {
                 id: `task-${Date.now()}`, 
                 description: taskDesc, 
                 completed: false, 
-                status: taskStatus, 
-                priority: taskPriority, 
-                owner: taskOwner,
-                startDate: taskStartDate,
-                endDate: taskEndDate,
-                notes: taskNotes
+                status: document.getElementById('taskStatus').value, 
+                priority: document.getElementById('taskPriority').value, 
+                owner: document.getElementById('taskOwner').value,
+                startDate: document.getElementById('taskStartDate').value,
+                endDate: document.getElementById('taskEndDate').value,
+                notes: document.getElementById('taskNotes').value,
+                isExisting: false // Mark as new
             };
             
-            const parentSubGoalIdFromHash = new URLSearchParams(window.location.hash.split('?')[1]).get('parentSubGoalId');
-            const parentGoalIdFromHash = new URLSearchParams(window.location.hash.split('?')[1]).get('parentGoalId');
-            const fromView = new URLSearchParams(window.location.hash.split('?')[1]).get('from');
+            const parentSubGoalId = addTaskView.dataset.parentSubGoalId; // Might be 'temp_sub_goal' or an actual ID
+            const parentGoalId = addTaskView.dataset.parentGoalId;
+            const fromContext = addTaskView.dataset.fromContext; // 'subGoalCreation', 'goalDetail'
 
-            if(fromView === 'subGoalCreation'){ 
+            if(fromContext === 'subGoalCreation'){ 
                 tempTasksForSubGoal.push(newTask);
-                const taskDisplayItem = document.createElement('div');
-                taskDisplayItem.className = 'p-1.5 border rounded-md bg-white text-xs ml-4';
-                taskDisplayItem.textContent = `Task: ${taskDesc}`;
-                if(tasksForSubGoalContainer) tasksForSubGoalContainer.appendChild(taskDisplayItem);
-                goBackToSubGoalCreation(); 
-            } else if (fromView === 'goalDetail' && parentGoalIdFromHash && parentSubGoalIdFromHash) { 
-                const mainGoal = goalsData[parentGoalIdFromHash];
+                renderTasksInSubGoalForm(); // Re-render tasks in the sub-goal form
+            } else if (fromContext === 'goalDetail' && parentGoalId && parentSubGoalId) { 
+                const mainGoal = goalsData[parentGoalId];
                 if(mainGoal && mainGoal.subGoals){
-                    const subGoal = mainGoal.subGoals.find(sg => sg.id === parentSubGoalIdFromHash);
+                    const subGoal = mainGoal.subGoals.find(sg => sg.id === parentSubGoalId);
                     if(subGoal){
                         if(!subGoal.tasks) subGoal.tasks = [];
                         subGoal.tasks.push(newTask);
+                        console.log(`New task added to sub-goal ${subGoal.description} in main goal ${mainGoal.description}`);
+                    } else {
+                        console.error("Parent sub-goal not found in goalDetail context for task:", parentSubGoalId);
+                        alert("Error: Could not add task. Parent sub-goal not found.");
                     }
+                } else {
+                    console.error("Parent goal or sub-goals not found in goalDetail context for task:", parentGoalId);
+                    alert("Error: Could not add task. Parent goal not found.");
                 }
-                window.location.hash = `#view-goal-${parentGoalIdFromHash}`; 
+            } else {
+                 console.error("Cannot determine where to save task. Context:", fromContext, "SubGoalId:", parentSubGoalId, "GoalId:", parentGoalId);
+                 alert("Error: Could not save task. Context unclear.");
+                 return;
             }
             console.log("Task Form Submitted:", newTask);
+            window.location.hash = addTaskView.dataset.returnTo || '#dashboard'; // Navigate back
         });
         
         
-        // Initialize routing on page load and listen for hash changes
-        window.addEventListener('load', routeHandler);
+        // Initialize routing and drawer
+        window.addEventListener('load', () => {
+            routeHandler();
+            if (window.innerWidth >= 1024) openDrawer(); else closeDrawer();
+        });
         window.addEventListener('hashchange', routeHandler);
 
         // Drawer Open/Close Logic
@@ -1453,7 +1783,7 @@
             if (patientDrawer) {
                 patientDrawer.classList.remove('-translate-x-full');
                 patientDrawer.classList.add('translate-x-0');
-                contentWrapper.classList.add('lg:ml-80'); 
+                if (contentWrapper) contentWrapper.classList.add('lg:ml-80'); 
             }
             if(drawerOverlay && window.innerWidth < 1024) { 
                 drawerOverlay.classList.remove('hidden');
@@ -1467,7 +1797,7 @@
             if (patientDrawer) {
                 patientDrawer.classList.remove('translate-x-0');
                 patientDrawer.classList.add('-translate-x-full');
-                contentWrapper.classList.remove('lg:ml-80');
+                if(contentWrapper) contentWrapper.classList.remove('lg:ml-80');
             }
              if(drawerOverlay) {
                 drawerOverlay.classList.add('hidden');
@@ -1475,12 +1805,6 @@
             document.body.style.overflow = ''; 
         }
         
-        if (window.innerWidth >= 1024) { 
-             openDrawer(); 
-        } else {
-            closeDrawer(); 
-        }
-
         if (openDrawerButton) openDrawerButton.addEventListener('click', openDrawer);
         if (closeDrawerButton) closeDrawerButton.addEventListener('click', closeDrawer);
         if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer); 
@@ -1491,6 +1815,7 @@
             }
         });
 
+        // Task Form Tabs
         taskFormTabs?.addEventListener('click', (e) => {
             if (e.target.tagName === 'BUTTON') {
                 const tab = e.target.dataset.tab;
