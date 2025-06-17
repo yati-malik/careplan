@@ -56,10 +56,9 @@
             font-size: 1.2em;
             color: #6B7280;
         }
-        /* Vertical Timeline Styles */
         .timeline {
             position: relative;
-            padding-left: 20px; /* Space for line and dots */
+            padding-left: 20px;
         }
         .timeline::before {
             content: '';
@@ -68,35 +67,33 @@
             top: 8px;
             bottom: 8px;
             width: 2px;
-            background-color: #E5E7EB; /* border-gray-200 */
+            background-color: #E5E7EB;
         }
         .timeline-item {
             position: relative;
         }
         .timeline-item:not(:last-child) {
-            margin-bottom: 1rem; /* space between entries */
+            margin-bottom: 1rem;
         }
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -19px; /* (padding-left - (dot-width / 2)) * -1 */
-            top: 6px;   /* Adjust vertical alignment */
+            left: -19px;
+            top: 6px;
             height: 10px;
             width: 10px;
             border-radius: 50%;
-            background-color: #9CA3AF; /* gray-400 */
+            background-color: #9CA3AF;
             z-index: 1;
         }
-        /* Highlighted dot for the most recent/important entry */
         .timeline-item-highlight::before {
-            background-color: #DC2626; /* red-600 */
+            background-color: #DC2626;
         }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 p-4 sm:p-6 lg:p-8">
 
     <div class="max-w-7xl mx-auto">
-        <!-- Header Section -->
         <header class="mb-6">
             <h1 class="text-3xl font-bold text-gray-900 mb-2">Care Plan</h1>
             <div class="flex flex-col sm:flex-row justify-between text-gray-600 text-sm">
@@ -105,16 +102,12 @@
             </div>
         </header>
 
-        <!-- Main Content -->
         <main class="space-y-6">
 
-            <!-- Primary Health Issues Section -->
             <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-5">
                 <h2 class="text-xl font-semibold text-gray-900 mb-4">Primary health issues</h2>
 
-                <!-- Issue 1: Pain Management -->
                 <div class="border border-gray-200 rounded-lg p-4">
-                    <!-- Header section with bottom border -->
                     <div class="border-b border-gray-200 pb-4 mb-4">
                         <div class="flex flex-wrap justify-between items-start mb-4">
                             <div class="flex items-center gap-2">
@@ -132,12 +125,9 @@
                         </div>
                     </div>
 
-                    <!-- Main Grid -->
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                        <!-- Column 1: Pain Scores & Meds -->
                         <div class="space-y-4">
-                            <!-- Pain Score Timeline -->
                             <div class="timeline">
                                 <div class="timeline-item timeline-item-highlight">
                                     <div class="flex items-center justify-between text-sm">
@@ -159,7 +149,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Suggestion Block -->
                             <div class="bg-gray-100 rounded-lg p-3 border border-gray-200 space-y-3">
                                 <div class="relative pl-4">
                                     <div class="absolute left-0 top-0 bottom-0 w-1 bg-gray-400 rounded-full"></div>
@@ -189,7 +178,6 @@
                             </div>
                         </div>
 
-                        <!-- Column 2: Related Tasks -->
                         <div class="related-tasks">
                             <h4 class="font-semibold mb-3">Related Tasks</h4>
                             <ul class="text-sm space-y-2 text-gray-700">
@@ -201,7 +189,6 @@
                             </ul>
                         </div>
 
-                        <!-- Column 3: Patient Notes -->
                         <div>
                              <p class="text-sm text-gray-500 mb-2">Patient states pain increasing in his legs, not relieved by repositioning.<br>20:29 by Matt, RN</p>
                              <div class="border border-gray-300 rounded-lg bg-white">
@@ -226,9 +213,7 @@
                     </div>
                 </div>
 
-                <!-- Issue 2: Accessibility -->
                 <div class="border border-gray-200 rounded-lg p-4 mt-6">
-                    <!-- Top row -->
                     <div class="flex flex-wrap justify-between items-start mb-4">
                         <div class="flex items-center gap-2">
                             <h3 class="text-lg font-semibold text-gray-800">Improve accessibility for discharge to home</h3>
@@ -243,10 +228,8 @@
                         <span>▲ Barrier to Discharge</span>
                     </div>
 
-                    <!-- Main Grid -->
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                        <!-- Column 1: Delay Detected -->
                         <div class="space-y-4">
                              <div class="text-sm p-3 bg-gray-50 rounded-md border border-gray-200 space-y-2">
                                 <p class="font-semibold text-gray-800">Delay Detected</p>
@@ -258,7 +241,6 @@
                             </div>
                         </div>
 
-                        <!-- Column 2: Related Tasks -->
                         <div class="related-tasks">
                             <h4 class="font-semibold mb-3">Related Tasks</h4>
                             <ul class="text-sm space-y-2 text-gray-700">
@@ -266,7 +248,6 @@
                             </ul>
                         </div>
 
-                        <!-- Column 3: Patient Notes -->
                         <div>
                              <p class="text-sm text-gray-500 mb-2">Patient states his car is in need of repair and does not have the financial means to get it fixed.<br>15:03 by Matt, RN</p>
                              <div class="border border-gray-300 rounded-lg bg-white">
