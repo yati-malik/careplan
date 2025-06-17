@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Care Plan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .status-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid #E5E7EB;
+        }
+        .status-tag-worsening {
+            background-color: #FEF2F2;
+            color: #991B1B;
+            border-color: #FEE2E2;
+        }
+        .status-tag-no-progress {
+             background-color: #EFF6FF;
+             color: #1E40AF;
+             border-color: #DBEAFE;
+        }
+        .status-tag-active {
+            background-color: #ECFDF5;
+            color: #065F46;
+        }
+        .status-tag-waiting {
+            background-color: #FFFBEB;
+            color: #92400E;
+        }
+        .related-tasks ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .related-tasks li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+        .related-tasks li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.2em;
+            color: #6B7280;
+        }
+        /* Vertical Timeline Styles */
+        .timeline {
+            position: relative;
+            padding-left: 20px; /* Space for line and dots */
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background-color: #E5E7EB; /* border-gray-200 */
+        }
+        .timeline-item {
+            position: relative;
+        }
+        .timeline-item:not(:last-child) {
+            margin-bottom: 1rem; /* space between entries */
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -19px; /* (padding-left - (dot-width / 2)) * -1 */
+            top: 6px;   /* Adjust vertical alignment */
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            background-color: #9CA3AF; /* gray-400 */
+            z-index: 1;
+        }
+        /* Highlighted dot for the most recent/important entry */
+        .timeline-item-highlight::before {
+            background-color: #DC2626; /* red-600 */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 p-4 sm:p-6 lg:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <!-- Header Section -->
+        <header class="mb-6">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Care Plan</h1>
+            <div class="flex flex-col sm:flex-row justify-between text-gray-600 text-sm">
+                <p><span class="font-semibold">Anticipated discharge:</span> in 1-2 days</p>
+                <p><span class="font-semibold">Discharge Readiness:</span> <span class="text-red-600 font-medium">Barriers Present</span></p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="space-y-6">
+
+            <!-- Primary Health Issues Section -->
+            <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-5">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Primary health issues</h2>
+
+                <!-- Issue 1: Pain Management -->
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <!-- Header section with bottom border -->
+                    <div class="border-b border-gray-200 pb-4 mb-4">
+                        <div class="flex flex-wrap justify-between items-start mb-4">
+                            <div class="flex items-center gap-2">
+                                <h3 class="text-lg font-semibold text-gray-800">Pain Management: Bilateral Legs</h3>
+                                <div class="status-tag status-tag-worsening">
+                                    Worsening
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-2 sm:mt-0">Corresponding Condition: Peripheral neuropathy</p>
+                        </div>
+                        <div class="flex flex-wrap items-center text-sm text-gray-500 gap-x-6 gap-y-1">
+                            <span>Target: Pain score <= 2</span>
+                            <span>Pain score: 6 ▲</span>
+                        </div>
+                    </div>
+
+                    <!-- Main Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                        <!-- Column 1: Pain Scores & Meds -->
+                        <div class="space-y-4">
+                            <!-- Pain Score Timeline -->
+                            <div class="timeline">
+                                <div class="timeline-item timeline-item-highlight">
+                                    <div class="flex items-center justify-between text-sm">
+                                        <p class="font-medium">Pain score: 6 <span class="text-red-500">▲</span></p>
+                                        <p class="text-gray-500">15:03 by Matt, RN</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="flex items-center justify-between text-sm">
+                                        <p class="font-medium">Pain score: 4</p>
+                                        <p class="text-gray-500">09:28 by Matt, RN</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="flex items-center justify-between text-sm">
+                                        <p class="font-medium">Pain score: 2</p>
+                                        <p class="text-gray-500">03:27 by Matt, RN</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-sm text-gray-600 p-3 bg-gray-50 rounded-md border border-gray-200 space-y-2">
+                               <p>Pain is progressing to a score of 6.</p>
+                               <p>PRN morphine discontinued, no other pain medications ordered.</p>
+                            </div>
+                            <div class="p-3 bg-gray-100 rounded-lg border border-gray-200 space-y-3">
+                                <div class="font-semibold text-gray-800 flex items-center gap-2">
+                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 8a6 6 0 11-12 0 6 6 0 0112 0zM7 8a.75.75 0 01.75-.75h4.5a.75.75 0 010 1.5h-4.5A.75.75 0 017 8z" clip-rule="evenodd" /></svg>
+                                    Gabapentin 300 mg nightly
+                                </div>
+                                <div class="text-xs text-gray-600 flex justify-between">
+                                    <span>1 tablet, daily</span>
+                                    <span>Type: Inpatient medication</span>
+                                </div>
+                                <div class="flex items-center justify-between text-xs">
+                                     <span class="status-tag status-tag-active text-xs">Active</span>
+                                     <span class="text-gray-500">Last administration: none</span>
+                                </div>
+                                <div class="flex gap-2 mt-2">
+                                    <button class="w-full text-sm bg-white border border-gray-300 rounded-md py-1.5 hover:bg-gray-50">Dismiss</button>
+                                    <button class="w-full text-sm bg-white border border-gray-300 rounded-md py-1.5 hover:bg-gray-50">Suggest Changes</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 2: Related Tasks -->
+                        <div class="related-tasks">
+                            <h4 class="font-semibold mb-3">Related Tasks</h4>
+                            <ul class="text-sm space-y-2 text-gray-700">
+                                <li>Reposition patient q2hrs</li>
+                                <li>Administer pain medications for pain target less than 2</li>
+                                <li>Assess peripheral pulses q12hrs</li>
+                                <li>Monitor the effectiveness of pain management interventions</li>
+                                <li>Encourage daily activities for increased mobility</li>
+                            </ul>
+                        </div>
+
+                        <!-- Column 3: Patient Notes -->
+                        <div>
+                             <p class="text-sm text-gray-500 mb-2">Patient states pain increasing in his legs, not relieved by repositioning.<br>20:29 by Matt, RN</p>
+                             <div class="border border-gray-300 rounded-lg bg-white">
+                                 <div class="p-3 text-sm">
+                                     <label for="progress_note_1" class="font-medium text-gray-700">Progress</label>
+                                     <textarea id="progress_note_1" rows="4" class="w-full mt-2 border-none focus:ring-0 resize-none p-0 text-gray-600" placeholder="Aa"></textarea>
+                                 </div>
+                                 <div class="bg-gray-50 p-2 border-t border-gray-300 flex justify-between items-center rounded-b-lg">
+                                      <div class="flex items-center gap-2">
+                                          <svg class="w-5 h-5 text-gray-500 cursor-pointer hover:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                          <span class="font-bold text-gray-500 cursor-pointer hover:text-gray-800">Aa</span>
+                                          <svg class="w-5 h-5 text-gray-500 cursor-pointer hover:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
+                                          <svg class="w-5 h-5 text-gray-500 cursor-pointer hover:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                      </div>
+                                       <div class="flex items-center gap-2">
+                                          <svg class="w-5 h-5 text-gray-500 cursor-pointer hover:text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
+                                      </div>
+                                 </div>
+                             </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Issue 2: Accessibility -->
+                <div class="border border-gray-200 rounded-lg p-4 mt-6">
+                    <!-- Top row -->
+                    <div class="flex flex-wrap justify-between items-start mb-4">
+                        <div class="flex items-center gap-2">
+                            <h3 class="text-lg font-semibold text-gray-800">Improve accessibility for discharge to home</h3>
+                            <div class="status-tag status-tag-no-progress">
+                                No Progress
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2 sm:mt-0">Corresponding Condition: Lack of Transport</p>
+                    </div>
+                     <div class="flex flex-wrap items-center text-sm text-red-600 font-medium gap-x-6 gap-y-1 mb-6">
+                        <span>▲ Barrier to Discharge</span>
+                    </div>
+
+                    <!-- Main Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                        <!-- Column 1: Delay Detected -->
+                        <div class="space-y-4">
+                             <div class="text-sm p-3 bg-gray-50 rounded-md border border-gray-200 space-y-2">
+                                <p class="font-semibold text-gray-800">Delay Detected</p>
+                               <p class="text-gray-600">Case worker hasn't seen patient in >2 days</p>
+                               <div class="flex items-center justify-between text-xs pt-1">
+                                   <span class="status-tag status-tag-waiting text-xs">Waiting for response</span>
+                                   <span class="text-gray-500">No update since 01/22/25</span>
+                               </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 2: Related Tasks -->
+                        <div class="related-tasks">
+                            <h4 class="font-semibold mb-3">Related Tasks</h4>
+                            <ul class="text-sm space-y-2 text-gray-700">
+                                <li>Consult Case Management for Transportation</li>
+                            </ul>
+                        </div>
+
+                        <!-- Column 3: Patient Notes -->
+                        <div>
+                             <p class="text-sm text-gray-500 mb-2">Patient states his car is in need of repair and does not have the financial means to get it fixed.<br>15:03 by Matt, RN</p>
+                             <div class="border border-gray-300 rounded-lg bg-white">
+                                 <div class="p-3 text-sm">
+                                     <label for="progress_note_2" class="font-medium text-gray-700">Progress</label>
+                                     <textarea id="progress_note_2" rows="4" class="w-full mt-2 border-none focus:ring-0 resize-none p-0 text-gray-600" placeholder="Aa"></textarea>
+                                 </div>
+                                 <div class="bg-gray-50 p-2 border-t border-gray-300 flex justify-between items-center rounded-b-lg">
+                                      <div class="flex items-center gap-2">
+                                          <svg class="w-5 h-5 text-gray-500 cursor-pointer hover:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                          <span class="font-bold text-gray-500 cursor-pointer hover:text-gray-800">Aa</span>
+                                          <svg class="w-5 h-5 text-gray-500 cursor-pointer hover:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
+                                          <svg class="w-5 h-5 text-gray-500 cursor-pointer hover:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                      </div>
+                                       <div class="flex items-center gap-2">
+                                          <svg class="w-5 h-5 text-gray-500 cursor-pointer hover:text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
+                                      </div>
+                                 </div>
+                             </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>
